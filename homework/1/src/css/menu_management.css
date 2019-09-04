@@ -1,0 +1,106 @@
+body {
+      padding-top: 70px;
+      background: url(https://images.unsplash.com/photo-1564675494777-bf71975b0b8c?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2850&q=80);
+      background-size: 100%;
+      background-attachment: fixed;
+      background-repeat： no-repeat;
+
+}
+
+.container {
+	background-color: rgba(0, 0, 0, 0.3); 
+}
+
+h1 {
+	font-family: chalkduster;
+	font-size: 70px;
+	font-weight: 500;
+	color: white;
+	padding-top: 10px;
+	text-align: center;
+	padding-bottom: 30px;
+
+}
+
+.type {
+	font-size: 25px;
+	font-family: Bradley hand;
+	padding-left: 20px;
+	color: black;
+}
+
+.name {
+	font-family: Avenir Next;
+	font-size: 20px;
+	color: Black ;
+}
+
+.price {
+	font-family: Bradley hand;
+	font-size: 20px;
+	text-align: right;
+	padding-right: 30px;
+}
+
+.addform {
+	margin-top: 28px;
+	margin-left: 30px;
+}
+
+.add-picture {
+	font-size: 16px;
+	margin-bottom: 10px;
+}
+
+.enter-name {
+	margin-top: 15px;
+	margin-bottom: 15px;
+	font-size: 16px;
+
+}
+
+.enter-price{
+	margin-top: 15px;
+	margin-bottom: 15px;
+	font-size: 16px;
+
+}
+
+.add-btn {
+	margin-top: 26px;
+	margin-bottom: 14px;
+	text-align: center;
+}
+
+input[type="text"] {
+	height:35px;
+}
+
+#name-enter {
+	margin-left: 12px;
+}
+
+#price-enter {
+	margin-left: 18px;
+	width: 80px;
+}
+
+.main-food {
+	height: 340px;
+}
+
+.pizza-food {
+	height: 378px;
+}
+
+.burger-food {
+	height: 385px;
+}
+
+.beverage-food {
+	height: 372px;
+}
+
+
+
+
