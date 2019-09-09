@@ -28,6 +28,14 @@
    background-color: white;
  }
 
+ .button-white:hover {
+   background-color: #DCDCDC;
+ }
+
 .button-red{
    background-color: #f44336;
+ }
+
+ .button-red:hover {
+   background-color: #F08080;
  }
