@@ -24,4 +24,8 @@ There is no operator precedence. Execute the operations in the order they are en
 
 If several operator buttons are clicked continuously, the operator of the last clicked button will be used.
 
-If operator button '=' is clicked and then click other operator buttons, the calculator will use the displayed number, rather than 0, to do next calculation
+If operator button '=' is clicked and then click other operator buttons, the calculator will use the displayed number, rather than 0, to do next calculation.
+
+If an error message is displayed and then click digit buttons, the displayed number will show the digit.
+
+If an error message is displayed and then click operator button '=', the displayed number will be 0, or click other operator buttons subsequently, the number used to calculate before operator will set to be 0.
