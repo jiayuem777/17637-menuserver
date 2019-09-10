@@ -32,10 +32,18 @@
    background-color: #DCDCDC;
  }
 
+ .button-white:active{
+   background-color: #DCDCDC;
+ }
+
 .button-red{
    background-color: #f44336;
  }
 
  .button-red:hover {
+   background-color: #F08080;
+ }
+
+ .button-red:active {
    background-color: #F08080;
  }

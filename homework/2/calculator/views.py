@@ -1,17 +1,14 @@
 from django.shortcuts import render
 
-val = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "0"]
-opt = ["+", "-", "*", "/", "="]
-
 # Create your views here.
 def calculator(request):
     if request.method == "GET":
         context = init()
     if request.method == "POST":
         if "num" in request.POST.keys():
-            context = updateValue(request, val)
+            context = updateValue(request)
         if "opt" in request.POST.keys():
-            context = updateOpt(request, opt)
+            context = updateOpt(request)
     return render(request, 'calculator/calculator.html', context)
 
 def init():
@@ -22,7 +19,7 @@ def error():
     context = {"display" : "ERROR", "cur_val" : 0, "pre_val" : 0, "pre_opt" : "+", "cur_opt" : "", "error" : 1}
     return context
 
-def updateValue(request, val):
+def updateValue(request):
     cur_val = int(request.POST["cur_val"])
     display = cur_val * 10 + int(request.POST["num"])
     pre_opt = request.POST["pre_opt"]
@@ -30,7 +27,7 @@ def updateValue(request, val):
     "pre_opt" : pre_opt, "cur_opt" : "", "error" : 0}
     return context
 
-def updateOpt(request, opt):
+def updateOpt(request):
     pre_opt = request.POST["pre_opt"]
     pre_val = int(request.POST["pre_val"])
     cur_val = int(request.POST["cur_val"])
