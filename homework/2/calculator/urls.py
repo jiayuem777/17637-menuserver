@@ -19,7 +19,7 @@ from django.conf.urls import url, include
 from . import views
 
 urlpatterns = [
-    url(r'^$', views.calculator, name='calculator'),
+    # url(r'^$', views.calculator, name='calculator'),
     # url(r'^$', views.calculator, name='calculator'),
     # path('<slug:project_slug>', view.project_detail, name='detail')
     # url(r'^input$', 'calculator.views.input'),
