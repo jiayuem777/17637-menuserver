@@ -29,3 +29,14 @@ If operator button '=' is clicked and then click other operator buttons, the cal
 If an error message is displayed and then click digit buttons, the displayed number will show the digit.
 
 If an error message is displayed and then click operator button '=', the displayed number will be 0, or click other operator buttons subsequently, the number used to calculate before operator will set to be 0.
+
+3. Validation
+
+If the inputs do not have demanded hidden inputs like "cur_val", "cur_opt", "pre_val", "pre_opt", the displayed area will show error massage.
+
+If the button inputs names are not "num" or "opt", the displayed area will show error massage.
+
+If the value of "cur_val", "pre_val" and "num" are not integers, the displayed area will show error massage.
+
+*Define list : ['+', '-', '*', '/', '='].
+If the value of "pre_opt" and "opt" is not in the above list, or the value of "cur_opt" is not in the list and not equals to '', the displayed area will show error massage.
