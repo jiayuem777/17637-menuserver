@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+{% load staticfiles %}
+<html>
+<head>
+  <title>Submitted Order</title>
+  <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+  <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+  <link rel="stylesheet" type="text/css" href="{% static 'css/submitted_order.css' %}">
+</head>
+<body>
+  <nav class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container">
+      <div class="navbar-header">
+         <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-nav-demo" aria-expanded="false">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a href="/main/" class="navbar-brand"><span class="glyphicon"></span>Mao's Restaurant</a>
+      </div>
+      <div class="collapse navbar-collapse" id="bs-nav-demo">
+        <ul class="nav navbar-nav">
+          <li><a href="/menu/">Menu</a></li>
+          <li><a href="/order/">Order</a></li>
+          <li><a href="/menu_management/">Menu Management</a></li>
+          <li><a href="/store_manager_employee/">Management</a></li>
+        </ul>
+        <ul class="nav navbar-nav navbar-right">
+          <li id="identity">
+
+            <div class="btn-group">
+              <a class="btn btn-primary" href="#"><i class="glyphicon glyphicon-user"></i> Employee</a>
+              <a class="btn btn-primary dropdown-toggle" data-toggle="dropdown" href="#"><span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                <li><a href="#">Account</a></li>
+                <li><a href="#">Change Password</a></li>
+                <li class="divider"></li>
+                <li><a href="#">Log out</a></li>
+              </ul>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <div class="container">
+    <h1 class="menu">
+      Submitted order
+    </h1>
+
+    <div class="chain-stores">
+      <form action='/submitted_order/' method='POST'>
+      <div class="btn-group">
+        {% if stores %}
+        {% for store in stores %}
+        <button class="btn btn-default" type="submit" name="chosen-store" value="{{store.store_id}}">{{store.name}}</button>
+        {% endfor %}
+        {% endif %}
+      </div>
+      {% csrf_token %}
+      </form>
+    </div>
+
+    <div class="row">
+      {% if submitted_order %}
+      {% for s in submitted_order %}
+      <div class="col-lg-6">
+        <div class="thumbnail">
+          <div class="dropdown">
+            <ul class="breadcrumb dropdown-toggle" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+              <li><a href="#" class="order-title">Order ID: {{s.order_id}}</a> </li>
+              <li><a href="#" class="order-title">Username: {{s.username}}</a> </li>
+            </ul>
+            <ul class="dropdown-menu order-dropdown" aria-labelledby="dropdownMenu1">
+              {% for o in s.order.all %}
+              <li class="dish-name">{{o.dish.name}}</li>
+              <li class="number">{{o.num}}</li>
+              <li class="divider"></li>
+              {% endfor %}
+
+              <div class="buttons">
+                <form action='/submitted_order/' method='POST'>
+                  <button class="btn btn-primary complete" type="submit" name="order-choice" value="fulfill">Fulfill</button>
+                  <button class="btn btn-danger decline" type="submit" name="order-choice" value="decline">Deline</button>
+                  <input type="hidden" name='submitted-order-id' value={{s.order_id}}>
+                {% csrf_token %}
+                </form>
+              </div>
+            </ul>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+      {% endif %}
+    </div>
+  </div>
+
+<script src="https://code.jquery.com/jquery-2.1.4.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+</body>
+</html>

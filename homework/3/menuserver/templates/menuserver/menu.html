@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+{% load staticfiles %}
+<html>
+<head>
+  <title>Menu</title>
+  <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+  <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+  <link rel="stylesheet" type="text/css" href="{% static 'css/menu.css' %}">
+
+</head>
+<body>
+  <nav class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container">
+      <div class="navbar-header">
+         <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-nav-demo" aria-expanded="false">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a href="/main/" class="navbar-brand"><span class="glyphicon"></span>Mao's Restaurant</a>
+      </div>
+      <div class="collapse navbar-collapse" id="bs-nav-demo">
+        <ul class="nav navbar-nav">
+          <li><a href="/order/">Order</a></li>
+          <li><a href="/menu_management/">Menu Management</a></li>
+          <li><a href="/submitted_order/">Submitted Orders</a></li>
+          <li><a href="/store_manager_employee/">Management</a></li>
+        </ul>
+        <ul class="nav navbar-nav navbar-right">
+          <li><a href="#">Sign Up</a></li>
+          <li><a href="#">Log in</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <div class="container">
+    <h1 class="menu">
+      Menu
+    </h1>
+
+    <ul class="breadcrumb">
+      <li><a href="#" class="type">Main</a> </li>
+    </ul>
+
+    <div class="row">
+      {% if menu %}
+      {% for item in menu %}
+      {% if item.categary == "main" %}
+      <div class="col-lg-4 col-sm-6">
+        <div class="thumbnail">
+          <img src="{{item.photo_url}}">
+          <div>
+            <h2 class="name">
+              {{item.name}}
+            </h2>
+          </div>
+          <div>
+            <h2 class="price">
+              {{item.price}}$
+            </h2>
+          </div>
+        </div>
+      </div>
+      {% endif %}
+      {% endfor %}
+      {% endif %}
+    </div>
+
+
+  <ul class="breadcrumb">
+      <li><a href="#" class="type">Pizza</a> </li>
+  </ul>
+
+  <div class="row">
+    {% if menu %}
+    {% for item in menu %}
+    {% if item.categary == "pizza" %}
+    <div class="col-lg-4 col-sm-6">
+      <div class="thumbnail">
+        <img src="{{item.photo_url}}">
+        <div>
+          <h2 class="name">
+            {{item.name}}
+          </h2>
+        </div>
+        <div>
+          <h2 class="price">
+            {{item.price}}$
+          </h2>
+        </div>
+      </div>
+    </div>
+    {% endif %}
+    {% endfor %}
+    {% endif %}
+  </div>
+
+  <ul class="breadcrumb">
+      <li><a href="#" class="type">Burger</a> </li>
+  </ul>
+
+      <div class="row">
+        {% if menu %}
+        {% for item in menu %}
+        {% if item.categary == "burger" %}
+        <div class="col-lg-4 col-sm-6">
+          <div class="thumbnail">
+            <img src="{{item.photo_url}}">
+            <div>
+              <h2 class="name">
+                {{item.name}}
+              </h2>
+            </div>
+            <div>
+              <h2 class="price">
+                {{item.price}}$
+              </h2>
+            </div>
+          </div>
+        </div>
+        {% endif %}
+        {% endfor %}
+        {% endif %}
+      </div>
+
+  <ul class="breadcrumb">
+      <li><a href="#" class="type">Beverage</a> </li>
+  </ul>
+
+    <div class="row">
+      {% if menu %}
+      {% for item in menu %}
+      {% if item.categary == "beverage" %}
+      <div class="col-lg-4 col-sm-6">
+        <div class="thumbnail">
+          <img src="{{item.photo_url}}">
+          <div>
+            <h2 class="name">
+              {{item.name}}
+            </h2>
+          </div>
+          <div>
+            <h2 class="price">
+              {{item.price}}$
+            </h2>
+          </div>
+        </div>
+      </div>
+      {% endif %}
+      {% endfor %}
+      {% endif %}
+    </div>
+  </div>
+
+
+<script src="https://code.jquery.com/jquery-2.1.4.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+</body>
+</html>

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+{% load staticfiles %}
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Dish</title>
+    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/manager.css' %}">
+  </head>
+  <body>
+    <div class="container">
+      <h1>Employee</h1>
+      <form action="/store_manager_employee/" method="POST">
+        <div class="manager-id">
+          <label class="label" id="manager-id">Employee ID: </label>
+          <input type="text" placeholder="ID" class="form-control" name="employee-id" {% if employee_id %}value="{{employee_id}}"{% endif %} required>
+          <input type="hidden" name="id" {% if employee_id %}value="{{id}}"{% endif %}>
+        </div>
+        <div class="name-enter">
+          <label class="label" id="name-label">Name: </label>
+          <input type="text" class="form-control" placeholder="Name" id="name-enter" name="employee-name" {% if name%}value="{{name}}"{% endif %} required>
+        </div>
+        {% if all_stores %}
+        <div class="store-enter form-check">
+          {% for s in all_stores %}
+          <div class="store-checkbox">
+          <input type="checkbox" class="form-check-input" id="exampleCheck1" name="choose-employee-store" value="{{s.store_id}}">
+          <label class="form-check-label" for="exampleCheck1">{{s.store_id}}: {{s.name}}</label>
+         </div>
+          {% endfor %}
+        </div>
+        {% endif %}
+        <a href="/store_manager_employee/">
+          <button type="submit" name="submit" {%if employee_id%}value="edit-employee" {%else%}value="new-employee"{%endif%} class="btn btn-default">Submit</button>
+        </a>
+        {% csrf_token %}
+      </form>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-2.1.4.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+  </body>
+</html>
