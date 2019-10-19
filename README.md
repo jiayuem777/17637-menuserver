@@ -6,21 +6,21 @@
 
 Homework 4: Deployment, Template inheritance, and media
 
-http://maojoymenuserver.azurewebsites.net
+http://maojoymenuserverhw5.azurewebsites.net
 
-Menu page: http://maojoymenuserver.azurewebsites.net/menu/
+Menu page: http://maojoymenuserverhw5.azurewebsites.net/menu/
 
-Menu Management Page: http://maojoymenuserver.azurewebsites.net/menu_management/
+Menu Management Page: http://maojoymenuserverhw5.azurewebsites.net/menu_management/
 
-Order Page: http://maojoymenuserver.azurewebsites.net/order/
+Order Page: http://maojoymenuserverhw5.azurewebsites.net/order/
 
-Submitted order page: http://maojoymenuserver.azurewebsites.net/submitted_order/
+Submitted order page: http://maojoymenuserverhw5.azurewebsites.net/submitted_order/
 
-Management page: http://maojoymenuserver.azurewebsites.net/management/
+Management page: http://maojoymenuserverhw5.azurewebsites.net/store_manager_employee/
 
 1. Main page
 
-The main page of the Menuserver system. 
+The main page of the Menuserver system.
 
 Five buttons on the page: View Menu, Menu Management, Order, Submitted Orders and Management, which are directed to the menu page, the menu management page, the ordering page, the submitted orders page and the management page to edit/create/delete stores, managers and employees and change their relationships.
 
@@ -32,7 +32,7 @@ The link http://localhost:8000/menu is directed to this page. The navbar on the 
 
 3. Menu Management page
 
-User can edit/delete/create dishes there. 
+User can edit/delete/create dishes there.
 
 In every dish block, there are two buttons: Edit and Delete. Clicking the Delete button, the dish will be deleted from the database and disappear from the page. Clicking the Edit button, it will be directed to a new page where you can modify the dish's category, name, price and re-choose a picture for the dish. Clicking the Submit button on that page will edit the dish to a new one.
 
@@ -40,7 +40,7 @@ At the end of each dish category, there's an empty block with a large + button, 
 
 4. Order page
 
-User can see the menu, order the dish they want and submit the orders. 
+User can see the menu, order the dish they want and submit the orders.
 
 The menu on the right shows the dishes of the restaurants and user can add the dish they want by clicking the add button.
 
@@ -50,7 +50,7 @@ User can choose the store they are ordering from and enter their username to sub
 
 5. Submitted Order page
 
-User can see the submitted orders on this page. 
+User can see the submitted orders on this page.
 
 On that page, under the title "Submitted Orders", there's a button group showing all the stores. By clicking on different buttons, the page will show the submitted orders form different stores respectively.
 
@@ -62,7 +62,7 @@ There are two buttons: Fulfill and Decline on the dropdown menu. By clicking eit
 
 6. Management page
 
-User can edit/create/delete stores, managers, employees on this page and also can change the relationship among the three. 
+User can edit/create/delete stores, managers, employees on this page and also can change the relationship among the three.
 
 There are three parts on the page: Stores, Managers and Employees.
 
@@ -81,6 +81,3 @@ One block shows the information of one manager/employee including the ID, name a
 On the left top of every block, there are two buttons: Edit and Delete. By clicking Delete, it will delete the manager/employee both from the page and the database. Clicking the Edit button, it will be directed to a new page, where you can change the ID, name and the stores.
 
 There's an empty block with a large + button, where you can create a new manager/employee.
-
-
-
