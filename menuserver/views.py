@@ -176,17 +176,7 @@ def store_manager_employee(request):
                         editted_store = Stores.objects.get(store_id=request.POST['store-id'])
                         editted_store.name = request.POST['store-name']
                         editted_store.address = request.POST['store-address']
-                        editted_store.save()
-                        manager_id_list = request.POST.getlist('choose-store-manager')
-                        for m in Managers.objects.all():
-                            editted_store.managers_set.remove(m)
-                        for mi in manager_id_list:
-                            editted_store.managers_set.add(Managers.objects.get(manager_id=mi))
-                        employee_id_list = request.POST.getlist('choose-store-employee')
-                        for e in Employees.objects.all():
-                            editted_store.employees_set.remove(e)
-                        for ei in employee_id_list:
-                            editted_store.employees_set.add(Employees.objects.get(employee_id=ei))
+                        editted_store.save()                        
             if request.POST['submit'] == 'new-store':
                 if 'store-id' in request.POST:
                     if Stores.objects.filter(store_id=request.POST['store-id']).count() == 0:
@@ -197,27 +187,41 @@ def store_manager_employee(request):
             if request.POST['submit'] == 'manager':
                 if 'username' in request.POST:
                     username=request.POST["username"]
-                    if Roles.objects.filter(user=User.objects.get(username=username)).exists():
-                        manager = Roles.objects.get(user=User.objects.get(username=username))
-                        manager.role = 'M'
-                        manager.save()
+
+                    if User.objects.filter(username=username).exists():
+                        us = User.objects.get(username=username)
+                        us.roles.role = "M"
+                        us.roles.save()
                         store_id_list = request.POST.getlist('choose-manager-store')
+                        manager = us.roles
                         for s in Stores.objects.all():
                             manager.stores.remove(s)
                         for si in store_id_list:
                             manager.stores.add(Stores.objects.get(store_id=si))
+                    else:
+                        stores = Stores.objects.order_by('store_id')
+                        error = "User with the username does not exist."
+                        return render(request, 'menuserver/manager.html', {"error": error, "all_stores": stores})
             if request.POST['submit'] == 'employee':
                 if 'username' in request.POST:
                     username=request.POST["username"]
-                    if Roles.objects.filter(user=User.objects.get(username=username)).exists():
-                        employee = Roles.objects.get(user=User.objects.get(username=username))
-                        employee.role = 'E'
-                        employee.save()
+                    print(username)
+                    if User.objects.filter(username=username).exists():
+
+                        us = User.objects.get(username=username)
+                        us.roles.role = "E"
+                        us.roles.save()
+                        store_id_list = request.POST.getlist('choose-employee-store')
+                        employee = us.roles
                         store_id_list = request.POST.getlist('choose-employee-store')
                         for s in Stores.objects.all():
                             employee.stores.remove(s)
                         for si in store_id_list:
                             employee.stores.add(Stores.objects.get(store_id=si))
+                    else:
+                        stores = Stores.objects.order_by('store_id')
+                        error = "User with the username does not exist."
+                        return render(request, 'menuserver/employee.html', {"error": error, "all_stores": stores})
         stores = Stores.objects.order_by('store_id')
         managers = Roles.objects.filter(role='M')
         employees = Roles.objects.filter(role='E')
@@ -278,8 +282,8 @@ def employee(request):
     if request.POST['submit'] == 'employee':
         if 'username' in request.POST:
             username=request.POST["username"]
-            if Roles.objects.filter(user=User.objects.get(username=username)).exists():
-                employee = Roles.objects.get(user=User.objects.get(username=username))
+            if User.objects.filter(username=username).exists():
+                employee = User.objects.get(username=username).roles
                 employee.role = 'E'
                 employee.save()
                 store_id_list = request.POST.getlist('choose-employee-store')
@@ -354,7 +358,7 @@ def order(request):
             if orders.count() > 0:
                 o_id = 0
                 oid_set = set()
-                all_submitted_orders = SubmittedOrders.objects.filter(is_fulfill=False)
+                all_submitted_orders = SubmittedOrders.objects.all()
                 for aso in all_submitted_orders:
                     oid_set.add(int(aso.order_id))
                 while(1):

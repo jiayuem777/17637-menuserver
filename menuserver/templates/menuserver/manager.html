@@ -5,6 +5,11 @@
 {% endblock %}
 {% block title %}Manager{% endblock %}
 {% block form_content %}
+<div>
+  {% if error %}
+  <p class="error">     {{error}}</p>
+  {% endif %}
+</div>
 <form action="{% url 'Management' %}" method="POST">
 {% if manager_user %}
 <div class="name-enter">
@@ -26,9 +31,9 @@
   {% endfor %}
 </div>
 {% endif %}
-<a href="{% url 'Management' %}">
+<div>
   <button type="submit" name="submit" value="manager" class="btn btn-default">Submit</button>
-</a>
+</div>
 {% csrf_token %}
 </form>
 {% endblock %}

@@ -5,6 +5,11 @@
 {% endblock %}
 {% block title %}Employee{% endblock %}
 {% block form_content %}
+<div>
+  {% if error %}
+  <p class="error">     {{error}}</p>
+  {% endif %}
+</div>
 <form action="{% url 'Management' %}" method="POST">
 <div class="name-enter">
   <label class="label" id="name-label">Username: </label>
@@ -20,9 +25,9 @@
   {% endfor %}
 </div>
 {% endif %}
-<a href="{% url 'Management' %}">
-  <button type="submit" name="submit" {%if employee_id%}value="edit-employee" {%else%}value="new-employee"{%endif%} class="btn btn-default">Submit</button>
-</a>
+<div>
+  <button type="submit" name="submit" value="employee" class="btn btn-default">Submit</button>
+</div>
 {% csrf_token %}
 </form>
 {% endblock %}

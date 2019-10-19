@@ -53,3 +53,7 @@ h1 {
   margin-left:200px;
   margin-bottom: 40px;
 }
+
+.error {
+  color: white;
+}
