@@ -2,8 +2,5 @@
 {% load staticfiles%}
 {% block css %}<link rel="stylesheet" type="text/css" href="{% static 'css/menu.css' %}">{% endblock %}
 {% block class3 %}class="container"{% endblock %}
-{% block extra_li %}
-<li><a href="{% url 'Order' %}">Order</a></li>
-<li><a href="{% url 'Menu Management' %}">Menu Management</a></li>
-{% endblock %}
+
 {% block title %}Menu{% endblock %}

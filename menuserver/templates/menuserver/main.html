@@ -5,7 +5,6 @@
 {% endblock %}
 {% block navbar %}
   <li><a href="#">About us</a></li>
-  <li><a href="#">Address</a></li>
   <li><a href="#">Contact</a></li>
 {% endblock %}
 {% block class3 %}class="container"{% endblock %}
@@ -21,7 +20,23 @@ Mao's Restaurant
   </a>
   {% if user.is_authenticated %}
   <a href="{% url 'Order' %}" id="button">
-    <button class="btn btn-lg order">Order</button>
+    <button class="btn btn-lg order">Make an Order</button>
   </a>
+  {% if manager %}
+  <a href="{% url 'Menu Management' %}" id="button">
+    <button class="btn btn-lg order">Menu Management</button>
+  </a>
+  <a href="{% url 'Management' %}" id="button">
+    <button class="btn btn-lg order">Management</button>
+  </a>
+  <a href="{% url 'Submitted Orders' %}" id="button">
+    <button class="btn btn-lg order">Submitted orders</button>
+  </a>
+  {% endif %}
+  {% if employee %}
+  <a href="{% url 'Submitted Orders' %}" id="button">
+    <button class="btn btn-lg order">Submitted orders</button>
+  </a>
+  {% endif %}
   {% endif %}
 {% endblock %}

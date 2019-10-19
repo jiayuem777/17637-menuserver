@@ -1,10 +1,6 @@
 {% extends "menuserver/base_menuserver_menu.html" %}
 {% load staticfiles%}
 {% block css %}<link rel="stylesheet" type="text/css" href="{% static 'css/menu_management.css' %}">{% endblock %}
-{% block extra_li %}
-<li><a href="{% url 'Menu' %}">Menu</a></li>
-<li><a href="{% url 'Order' %}">Order</a></li>
-{% endblock %}
 {% block class3 %}class="container"{% endblock %}
 {% block title %}Menu Management{% endblock %}
 {% block buttons1 %}

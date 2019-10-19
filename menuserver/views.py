@@ -12,6 +12,11 @@ from django.contrib.auth.decorators import login_required
 
 # Create your views here.
 def main(request):
+    current_user = request.user
+    if current_user.is_authenticated and current_user.roles.role == 'M':
+        return render(request, 'menuserver/main.html', {"manager": 1})
+    if current_user.is_authenticated and current_user.roles.role == 'E':
+        return render(request, 'menuserver/main.html', {"employee": 1})
     return render(request, 'menuserver/main.html')
 
 def menu(request):
@@ -176,7 +181,7 @@ def store_manager_employee(request):
                         editted_store = Stores.objects.get(store_id=request.POST['store-id'])
                         editted_store.name = request.POST['store-name']
                         editted_store.address = request.POST['store-address']
-                        editted_store.save()                        
+                        editted_store.save()
             if request.POST['submit'] == 'new-store':
                 if 'store-id' in request.POST:
                     if Stores.objects.filter(store_id=request.POST['store-id']).count() == 0:
@@ -485,7 +490,12 @@ def user_login(request):
                     login(request, user)
                     # Send the user back to some page.
                     # In this case their homepage.
-                    return render(request, 'menuserver/main.html', {})
+                    if user.roles.role == 'M':
+                        return render(request, 'menuserver/main.html', {"manager": 1})
+                    elif user.roles.role == 'E':
+                        return render(request, 'menuserver/main.html', {"employee": 1})
+                    else:
+                        return render(request, 'menuserver/main.html', {})
                 else:
                     # If account is not active:
                     ctx["error"] = "Your account is not active."

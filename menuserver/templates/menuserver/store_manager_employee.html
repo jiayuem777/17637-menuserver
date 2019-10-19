@@ -1,12 +1,6 @@
 {% extends "menuserver/base_menuserver_so.html" %}
 {% load staticfiles%}
 {% block css %} <link rel="stylesheet" type="text/css" href="{% static 'css/store_manager_employee.css' %}">{% endblock %}
-{% block navbar %}
-<li class="top"><a href="{% url 'Menu' %}">Menu</a></li>
-<li class="top"><a href="{% url 'Menu Management' %}">Menu Management</a></li>
-<li class="top"><a href="{% url 'Order' %}">Order</a></li>
-<li class="top"><a href="{% url 'Submitted Orders' %}">Submitted Orders</a></li>
-{% endblock %}
 {%block title%}Stores{%endblock%}
 
 {% block thumbnail1 %}

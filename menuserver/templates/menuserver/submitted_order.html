@@ -1,9 +1,6 @@
 {% extends "menuserver/base_menuserver_so.html" %}
 {% load staticfiles%}
 {% block css %}<link rel="stylesheet" type="text/css" href="{% static 'css/submitted_order.css' %}">{% endblock %}
-{% block extra_li %}
-<li><a href="{% url 'Management' %}">Management</a></li>
-{% endblock %}
 {% block title %}Submitted order{% endblock %}
 {% block stores %}
     <div class="chain-stores">
