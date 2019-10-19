@@ -1,10 +1,10 @@
 
 
 
-**********Use one-day grace day**********
+**********Use three-day grace day**********
 
 
-Homework 4: Deployment, Template inheritance, and media
+Homework 5
 
 http://maojoymenuserverhw5.azurewebsites.net
 
@@ -22,7 +22,14 @@ Management page: http://maojoymenuserverhw5.azurewebsites.net/store_manager_empl
 
 The main page of the Menuserver system.
 
-Five buttons on the page: View Menu, Menu Management, Order, Submitted Orders and Management, which are directed to the menu page, the menu management page, the ordering page, the submitted orders page and the management page to edit/create/delete stores, managers and employees and change their relationships.
+Not log in: one button: view menu;
+
+log in as customer: two buttons: view menu, make an order;
+
+log in as manager: five buttons: View Menu, Menu Management, Make an order, Submitted Orders and Management
+
+log in as employee: three buttons: View Menu, Make an order, Submitted Orders
+
 
 2. Menu page
 
