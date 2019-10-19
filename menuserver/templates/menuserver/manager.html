@@ -1,0 +1,34 @@
+{% extends "menuserver/base_submit.html" %}
+{% load staticfiles%}
+{% block css %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/manager.css' %}">
+{% endblock %}
+{% block title %}Manager{% endblock %}
+{% block form_content %}
+<form action="{% url 'Management' %}" method="POST">
+{% if manager_user %}
+<div class="name-enter">
+  <label class="label" id="name-label">Name: </label>
+  <input type="text" class="form-control" placeholder="Name" id="name-enter" name="username" value="{{manager_user.first_name}} {{manager_user.last_name}}" readonly="readonly" required>
+</div>
+{% endif %}
+<div class="name-enter">
+  <label class="label" id="name-label">Username: </label>
+  <input type="text" class="form-control" placeholder="Username" id="name-enter" name="username" {% if manager_user %}value="{{manager_user.username}}" readonly="readonly"{% endif %} required>
+</div>
+{% if all_stores %}
+<div class="store-enter form-check">
+  {% for s in all_stores %}
+  <div class="store-checkbox">
+  <input type="checkbox" class="form-check-input" id="exampleCheck1" name="choose-manager-store" value="{{s.store_id}}">
+  <label class="form-check-label" for="exampleCheck1">{{s.store_id}}: {{s.name}}</label>
+ </div>
+  {% endfor %}
+</div>
+{% endif %}
+<a href="{% url 'Management' %}">
+  <button type="submit" name="submit" value="manager" class="btn btn-default">Submit</button>
+</a>
+{% csrf_token %}
+</form>
+{% endblock %}

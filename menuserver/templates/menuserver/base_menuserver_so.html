@@ -1,0 +1,19 @@
+{% extends "menuserver/base_menuserver.html" %}
+{% load staticfiles%}
+{%block css%}{%endblock%}
+{% block navbar %}
+<li><a href="{% url 'Menu' %}">Menu</a></li>
+<li><a href="{% url 'Order' %}">Order</a></li>
+<li><a href="{% url 'Menu Management' %}">Menu Management</a></li>
+{% block extra_li %}{% endblock %}
+{% endblock %}
+{% block class1 %}class="container"{% endblock %}
+{% block title %}{% endblock %}
+{% block content %}
+  {% block stores %}{% endblock %}
+  {% block thumbnail1 %}{% endblock %}
+{% endblock %}
+{% block block1 %}
+{% endblock%}
+{% block block2 %}
+{% endblock%}

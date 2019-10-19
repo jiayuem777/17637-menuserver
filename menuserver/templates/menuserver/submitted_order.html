@@ -1,0 +1,54 @@
+{% extends "menuserver/base_menuserver_so.html" %}
+{% load staticfiles%}
+{% block css %}<link rel="stylesheet" type="text/css" href="{% static 'css/submitted_order.css' %}">{% endblock %}
+{% block extra_li %}
+<li><a href="{% url 'Management' %}">Management</a></li>
+{% endblock %}
+{% block title %}Submitted order{% endblock %}
+{% block stores %}
+    <div class="chain-stores">
+      <form action="{% url 'Submitted Orders' %}" method='POST'>
+      <div class="btn-group">
+        {% if stores %}
+        {% for store in stores %}
+        <button class="btn btn-default" type="submit" name="chosen-store" value="{{store.store_id}}">{{store.name}}</button>
+        {% endfor %}
+        {% endif %}
+      </div>
+      {% csrf_token %}
+      </form>
+    </div>
+{% endblock %}
+
+{% block thumbnail1 %}
+      {% if submitted_order %}
+      {% for s in submitted_order %}
+      <div class="col-lg-6">
+        <div class="thumbnail">
+          <div class="dropdown">
+            <ul class="breadcrumb dropdown-toggle" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+              <li><a href="#" class="order-title">Order ID: {{s.order_id}}</a> </li>
+              <li><a href="#" class="order-title">Username: {{s.username}}</a> </li>
+            </ul>
+            <ul class="dropdown-menu order-dropdown" aria-labelledby="dropdownMenu1">
+              {% for o in s.order.all %}
+              <li class="dish-name">{{o.dish.name}}</li>
+              <li class="number">{{o.num}}</li>
+              <li class="divider"></li>
+              {% endfor %}
+
+              <div class="buttons">
+                <form action="{% url 'Submitted Orders' %}" method='POST'>
+                  <button class="btn btn-primary complete" type="submit" name="order-choice" value="fulfill">Fulfill</button>
+                  <button class="btn btn-danger decline" type="submit" name="order-choice" value="decline">Deline</button>
+                  <input type="hidden" name='submitted-order-id' value={{s.order_id}}>
+                {% csrf_token %}
+                </form>
+              </div>
+            </ul>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+      {% endif %}
+{% endblock %}

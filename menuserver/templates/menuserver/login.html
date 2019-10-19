@@ -1,0 +1,25 @@
+{% extends "menuserver/base_submit.html" %}
+{% load staticfiles%}
+{% block css %}<link rel="stylesheet" type="text/css" href="{% static 'css/dish.css' %}">{% endblock %}
+{% block title %}Register{% endblock %}
+{% block form_content %}
+<form method="post">
+  {% csrf_token %}
+  {% if error %}
+  <div>
+    <p id="error-message">{{error}}</p>
+  </div>
+  {% endif %}
+  <div>
+    <label class="label">Username: </label>
+    <input type="text" class="form-control" name="username" placeholder="Username" {% if username %}value={{username}}{% endif %}>
+  </div>
+  <div>
+    <label class="label">Password: </label>
+    <input type="password" class="form-control" name="password" placeholder="Password" {% if password %}value={{password}}{% endif %}>
+  </div>
+  <div>
+    <input type="submit" name="login-submit" value="Login">
+  </div>
+</form>
+{% endblock %}

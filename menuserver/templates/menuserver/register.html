@@ -1,0 +1,24 @@
+{% extends "menuserver/base_submit.html" %}
+{% load staticfiles%}
+{% block css %}<link rel="stylesheet" type="text/css" href="{% static 'css/dish.css' %}">{% endblock %}
+{% block title %}Register{% endblock %}
+{% block form_content %}
+  <form method="POST">
+    {% csrf_token %}
+    {% if error %}
+    <div>
+      <p id="error-message">{{error}}</p>
+    </div>
+    {% endif %}
+
+    {{user_form.as_p}}
+    <div>
+      <label class="label">Confirm Password: </label>
+      <input type="password" name="repeat-password" placeholder="confirm password" {% if password2 %}value={{password2}}{% endif %}>
+    </div>
+    <div>
+      <input type="submit" name="register-submit" value="Register">
+    </div>
+
+  </form>
+{% endblock %}

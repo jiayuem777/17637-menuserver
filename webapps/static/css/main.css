@@ -1,0 +1,41 @@
+body {
+      padding-top: 20px;
+      background: url("https://i.dietdoctor.com/wp-content/uploads/2018/06/DD_keto-meals_feat.jpg?auto=compress%2Cformat&w=1500&h=844&fit=crop");
+      background-size: 100%;
+      background-attachment: fixed;
+      background-repeat： no-repeat;
+    }
+
+h1 {
+	font-family: chalkduster;
+	font-size: 70px;
+	font-weight: 500;
+	color: white;
+	height: 300px;
+	padding-top: 170px;
+	text-align: center;
+}
+
+p {
+	font-family: Bradley hand;
+	font-size: 20px;
+	color: white;
+	text-align: center;
+	height: 70px;
+  margin-top: 10px;
+	margin-bottom: 40px;
+}
+
+#button {
+  text-align:center;
+	margin-left: 460px;
+	font-size: 30px;
+	font-family: chalkduster;
+	color: white;
+}
+
+.btn {
+  background-color: rgba(0, 0, 0, 0.5);
+  width: 220px;
+  height: 50px;
+}

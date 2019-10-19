@@ -1,0 +1,10 @@
+{% extends "menuserver/base.html" %}
+{% load staticfiles%}
+{% block css %}{% endblock %}
+{% block body %}
+<div class="container">
+  <h1>{%block title%}{%endblock%}</h1>
+    {%block form_content%}
+    {% endblock %}
+</div>
+{% endblock %}

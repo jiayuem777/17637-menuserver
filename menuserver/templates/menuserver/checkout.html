@@ -1,0 +1,77 @@
+{% extends "menuserver/base_menuserver_so.html" %}
+{% load staticfiles%}
+{% block css %}<link rel="stylesheet" type="text/css" href="{% static 'css/submitted_order.css' %}">{% endblock %}
+
+{% block title %}Order Status{% endblock %}
+
+{% block thumbnail1 %}
+    <div>
+      <h1>Processing orders</h1>
+      {% if processing_order %}
+      {% for s in processing_order %}
+      <div class="col-lg-6">
+        <div class="thumbnail">
+          <div class="dropdown">
+            <ul class="breadcrumb dropdown-toggle" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+              <li><a href="#" class="order-title">Order ID: {{s.order_id}}</a> </li>
+            </ul>
+            <ul class="dropdown-menu order-dropdown" aria-labelledby="dropdownMenu1">
+              {% for o in s.order.all %}
+              <li class="dish-name">{{o.dish.name}}</li>
+              <li class="number">{{o.num}}</li>
+              <li class="divider"></li>
+              {% endfor %}
+            </ul>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+      {% endif %}
+    </div>
+    <div>
+      <h1>Fulfilled orders</h1>
+      {% if fulfilled_order %}
+      {% for s in fulfilled_order %}
+      <div class="col-lg-6">
+        <div class="thumbnail">
+          <div class="dropdown">
+            <ul class="breadcrumb dropdown-toggle" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+              <li><a href="#" class="order-title">Order ID: {{s.order_id}}</a> </li>
+            </ul>
+            <ul class="dropdown-menu order-dropdown" aria-labelledby="dropdownMenu1">
+              {% for o in s.order.all %}
+              <li class="dish-name">{{o.dish.name}}</li>
+              <li class="number">{{o.num}}</li>
+              <li class="divider"></li>
+              {% endfor %}
+            </ul>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+      {% endif %}
+    </div>
+    <div>
+      <h1>Declined orders</h1>
+      {% if declined_order %}
+      {% for s in declined_order %}
+      <div class="col-lg-6">
+        <div class="thumbnail">
+          <div class="dropdown">
+            <ul class="breadcrumb dropdown-toggle" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+              <li><a href="#" class="order-title">Order ID: {{s.order_id}}</a> </li>
+            </ul>
+            <ul class="dropdown-menu order-dropdown" aria-labelledby="dropdownMenu1">
+              {% for o in s.order.all %}
+              <li class="dish-name">{{o.dish.name}}</li>
+              <li class="number">{{o.num}}</li>
+              <li class="divider"></li>
+              {% endfor %}
+            </ul>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+      {% endif %}
+    </div>
+{% endblock %}

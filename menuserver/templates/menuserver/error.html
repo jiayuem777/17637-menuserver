@@ -1,0 +1,10 @@
+{% extends "menuserver/base_submit.html" %}
+{% load staticfiles%}
+{% block css %}
+  <link rel="stylesheet" type="text/css" href="{% static 'css/dish.css' %}">{% endblock %}
+{% block form_content %}
+<div>
+<h1>Your permission is declined!</h1>
+</div>
+<button class="btn btn-default" href="{% url 'Main' %}">Back to Homepage</button>
+{% endblock %}

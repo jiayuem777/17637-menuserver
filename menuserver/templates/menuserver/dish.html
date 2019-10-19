@@ -1,0 +1,37 @@
+{% extends "menuserver/base_submit.html" %}
+{% load staticfiles%}
+{% block css %}
+  <link rel="stylesheet" type="text/css" href="{% static 'css/dish.css' %}">{% endblock %}
+{% block title %}Dish{% endblock %}
+{% block form_content %}
+<form action="{% url 'Menu Management' %}" method="POST" enctype="multipart/form-data">
+<div>
+<label class="label" id="category">Category: </label>
+<select name="category" class="form-control" required>
+  <option value ="main" {% if categary == "main"%} selected="selected" {% endif %}>Main</option>
+  <option value ="pizza" {% if categary == "pizza"%} selected="selected" {% endif %}>Pizza</option>
+  <option value="burger" {% if categary == "burger"%} selected="selected" {% endif %}>Burger</option>
+  <option value="beverage" {% if categary == "beverage"%} selected="selected" {% endif %}>Beverage</option>
+</select>
+</div>
+<div class="photo-enter">
+  <label class="label" id="photo-url">Photo: </label>
+  <div class="file-enter">
+  <input type="file" class="form-control-file" id="exampleFormControlFile1" name="photo-file" required>
+  </div>
+</div>
+<div class="name-enter">
+  <label class="label" id="name-label">Name: </label>
+  <input type="text" class="form-control" placeholder="Name" id="name-enter" name="dish-name" {% if name %}value="{{name}}"{% endif %} required>
+</div>
+<div class="price-enter">
+  <label class="label" id="price-label">Price: </label>
+  <input type="text" class="form-control" placeholder="Price" id="price-enter" name="dish-price" {% if name %}value="{{price}}"{% endif %} required>
+</div>
+<input type="hidden" name="dish-id" value={{id}}>
+<a href="/menu_management/">
+  <button type="submit" name="submit-dish" {%if name%}value="edit-dish"{%else%}value="new-dish"{%endif%} class="btn btn-default">Submit</button>
+</a>
+{% csrf_token %}
+</form>
+{% endblock %}

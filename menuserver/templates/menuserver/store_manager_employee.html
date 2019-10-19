@@ -1,0 +1,161 @@
+{% extends "menuserver/base_menuserver_so.html" %}
+{% load staticfiles%}
+{% block css %} <link rel="stylesheet" type="text/css" href="{% static 'css/store_manager_employee.css' %}">{% endblock %}
+{% block navbar %}
+<li class="top"><a href="{% url 'Menu' %}">Menu</a></li>
+<li class="top"><a href="{% url 'Menu Management' %}">Menu Management</a></li>
+<li class="top"><a href="{% url 'Order' %}">Order</a></li>
+<li class="top"><a href="{% url 'Submitted Orders' %}">Submitted Orders</a></li>
+{% endblock %}
+{%block title%}Stores{%endblock%}
+
+{% block thumbnail1 %}
+<div class="row">
+      {% if stores %}
+      {% for s in stores %}
+      <div class="col-lg-6">
+        <div class="thumbnail store-thumbnail">
+          <div class="store-block">
+            <div class="buttons">
+              <form action="{% url 'Management' %}" method='POST'>
+                <a href="/store/" class="edit">
+                  <button class="btn btn-primary" id="edit" type="submit" name="change-store" value="edit">Edit</button>
+                </a>
+                <a href="/store_manager_employee/" class="delete">
+                  <button class="btn btn-danger" id="delete" type="submit" name="change-store" value="delete">Delete</button>
+                </a>
+                <input type="hidden" name='change-store-id' value={{s.store_id}}>
+              {% csrf_token %}
+              </form>
+            </div>
+            <ul class="store-ul">
+              <li class="store-id line-style"><b>Store ID:</b> {{s.store_id}}</li>
+              <li class="divider line-style"></li>
+              <li class="store-name line-style"><b>Store Name:</b> {{s.name}}</li>
+              <li class="divider line-style"></li>
+              <li class="store-address line-style"><b>Store Address:</b> {{s.address}}</li>
+              <li class="divider line-style"></li>
+            </ul>
+
+            </div>
+          </div>
+        </div>
+        {% endfor %}
+        {% endif %}
+        <div class="col-lg-6">
+          <div class="thumbnail add-block store-thumbnail">
+            <a href="{% url 'Store' %}" class="add-store">
+              <button class="btn btn-default add-s" name="add-store">+</button>
+            </a>
+          </div>
+        </div>
+      </div>
+
+{% endblock %}
+
+{% block block1 %}
+<div class="manager-part">
+<h1>Managers</h1>
+{<div class="row">
+  {% if managers %}
+  {% for m in managers %}
+  <div class="col-lg-6">
+  <div class="thumbnail manager-thumbnail">
+  <div class="manager-block">
+    <div class="buttons">
+      <form action="{% url 'Management' %}" method='POST'>
+        <a href="{% url 'Manager' %}" class="edit">
+          <button class="btn btn-primary" id="edit" type="submit" name="change-manager" value="edit">Edit</button>
+        </a>
+        <a href="{% url 'Management' %}" class="delete">
+          <button class="btn btn-danger" id="delete" type="submit" name="change-manager" value="delete">Delete</button>
+        </a>
+        <input type="hidden" name='change-manager-id' value={{m.id}}>
+      {% csrf_token %}
+      </form>
+    </div>
+    <ul class="manager-ul">
+      <li class="manager-name line-style"><b>Manager Name:</b> {{m.user.first_name}} {{m.user.last_name}}</li>
+      <li class="divider line-style"></li>
+      <li class="line-style"><b>Manager Username:</b> {{m.user.username}}</li>
+      <li class="manager-stores line-style">
+        <div class="store-management"><b>Store Management:</b></div>
+        <ul class="store-management-ul">
+          {% for ms in m.stores.all %}
+          <li class="store-id-name"><span class="store-id">{{ms.store_id}}: </span> <span class="store-name">{{ms.name}}</span> </li>
+          {% endfor %}
+        </ul>
+      </li>
+      <li style="list-style-type:none;" class="divider"></li>
+    </ul>
+
+    </div>
+  </div>
+  </div>
+  {% endfor %}
+  {% endif %}
+  <div class="col-lg-6">
+    <div class="thumbnail manager-thumbnail add-block-m">
+      <a href="{% url 'Manager' %}" class="add-manager">
+        <button class="btn btn-default add-m">+</button>
+      </a>
+    </div>
+  </div>
+</div>
+</div>
+{% endblock %}
+
+{% block block2 %}
+<div class="employee-part">
+    <h1 class="employees">
+      employees
+    </h1>
+
+    <div class="row">
+      {% if employees %}
+      {% for e in employees %}
+      <div class="col-lg-6">
+        <div class="thumbnail manager-thumbnail">
+          <div class="manager-block">
+            <div class="buttons">
+              <form action="{% url 'Management' %}" method='POST'>
+                <a href="{% url 'Employee' %}" class="edit">
+                  <button class="btn btn-primary" id="edit" type="submit" name="change-employee" value="edit">Edit</button>
+                </a>
+                <a href="{% url 'Management' %}"class="delete">
+                  <button class="btn btn-danger" id="delete" type="submit" name="change-employee" value="delete">Delete</button>
+                </a>
+                <input type="hidden" name='change-employee-id' value={{e.id}}>
+              {% csrf_token %}
+              </form>
+            </div>
+              <ul class="manager-ul">
+                <li class="manager-name line-style"><b>Employee Name:</b> {{e.user.first_name}} {{e.user.last_name}}</li>
+                <li class="divider line-style"></li>
+                <li class="manager-stores line-style">
+
+                  <div class="store-management"><b>Store Management:</b></div>
+                  <ul class="store-management-ul">
+                    {% for es in e.stores.all %}
+                    <li class="store-id-name"><span class="store-id">{{es.store_id}}: </span> <span class="store-name">{{es.name}}</span> </li>
+                    {% endfor %}
+                  </ul>
+
+                </li>
+                <li style="list-style-type:none;" class="divider"></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        {% endfor %}
+        {% endif %}
+        <div class="col-lg-6">
+          <div class="thumbnail manager-thumbnail add-block-m">
+            <a href="{% url 'Employee' %}" class="add-manager">
+              <button class="btn btn-default add-m">+</button>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,54 @@
+{% extends "menuserver/base.html" %}
+{% load staticfiles%}
+  {%block css%}{%endblock%}
+  {%block body%}
+  <nav class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container">
+      <div class="navbar-header">
+         <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-nav-demo" aria-expanded="false">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a href="{% url 'Main' %}" class="navbar-brand"><span class="glyphicon"></span>Mao's Restaurant</a>
+      </div>
+      <div class="collapse navbar-collapse" id="bs-nav-demo">
+        <ul class="nav navbar-nav">
+          {% block navbar %}
+          {% endblock %}
+        </ul>
+        <ul class="nav navbar-nav navbar-right">
+          {% if user.is_authenticated %}
+          <li id="identity">
+            <div class="btn-group">
+              <a class="btn btn-primary dropdown-toggle" data-toggle="dropdown" href="#"><span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                <li><a href="#">{{user.username}}</a></li>
+                <li class="divider"></li>
+                <li><a href="{% url 'Logout' %}">Log out</a></li>
+              </ul>
+            </div>
+          </li>
+          {% else %}
+          <a class="nav-link" href="{% url 'Register' %}">Register</a>
+          <a class="nav-link" href="{% url 'Login' %}">Login</a>
+        {% endif %}
+        </ul>
+      </div>
+    </div>
+  </nav>
+  <div {% block class3 %}{% endblock %}>
+    <div {% block class1 %}{% endblock %}>
+      <div {% block class2 %}{% endblock %}>
+        <h1>{% block title %}{% endblock %}</h1>
+        {% block content %}
+        {% endblock %}
+      </div>
+      {% block sidebar %}{% endblock %}
+      {% block block1 %}
+      {% endblock %}
+      {% block block2 %}
+      {% endblock%}
+    </div>
+  </div>
+  {% endblock %}

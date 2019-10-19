@@ -1,0 +1,101 @@
+{% extends "menuserver/base_menuserver_menu.html" %}
+{% load staticfiles%}
+{% block css %}<link rel="stylesheet" type="text/css" href="{% static 'css/order.css' %}">{% endblock %}
+{% block extra_li %}
+<li><a href="{% url 'Menu' %}">Menu</a></li>
+<li><a href="{% url 'Menu Management' %}">Menu Management</a></li>
+{% endblock %}
+{% block class1 %}class="row content"{% endblock %}
+{% block class2 %}class="col-sm-9 main"{% endblock %}
+{% block class3 %}class="container-fluid"{% endblock %}
+{% block title %}Menu{% endblock %}
+{% block buttons1 %}
+<div class="buttons">
+  <form method="POST">
+    <a href="{% url 'Order' %}" class="add-dish">
+      <button class="btn btn-danger" type="submit" name="add-dish" value="add">Add</button>
+    </a>
+    <input type="hidden" name="dish-name" value="{{item.name}}">
+    {% csrf_token %}
+  </form>
+</div>
+{% endblock %}
+{% block buttons2 %}
+<div class="buttons">
+  <form method="POST">
+    <a href="{% url 'Order' %}" class="add-dish">
+      <button class="btn btn-danger" type="submit" name="add-dish" value="add">Add</button>
+    </a>
+    <input type="hidden" name="dish-name" value="{{item.name}}">
+    {% csrf_token %}
+  </form>
+</div>
+{% endblock %}
+{% block buttons3 %}
+<div class="buttons">
+  <form method="POST">
+    <a href="{% url 'Order' %}" class="add-dish">
+      <button class="btn btn-danger" type="submit" name="add-dish" value="add">Add</button>
+    </a>
+    <input type="hidden" name="dish-name" value="{{item.name}}">
+    {% csrf_token %}
+  </form>
+</div>
+{% endblock %}
+{% block buttons4 %}
+<div class="buttons">
+  <form method="POST">
+    <a href="{% url 'Order' %}" class="add-dish">
+      <button class="btn btn-danger" type="submit" name="add-dish" value="add">Add</button>
+    </a>
+    <input type="hidden" name="dish-name" value="{{item.name}}">
+    {% csrf_token %}
+  </form>
+</div>
+{% endblock %}
+{% block sidebar %}
+<div class="sidenav hidden-xs">
+  <div class="order-part">
+  <ul class="nav nav-pills nav-stacked">
+    <h2 id="order-title">Order</h2>
+    {% if orders %}
+    {% for order in orders%}
+    <form action="{% url 'Order' %}" method="POST">
+      <li class="order-line">
+        <h3 class="dish">{{order.dish.name}}</h3>
+        <h3 class="number">
+          <button class="btn btn-default" type="submit" name="increase-num" value="{{order.dish.name}}">+</button>
+          {{order.num}}
+          <button class="btn btn-default" type="submit" name="decrease-num" value="{{order.dish.name}}">-</button>
+        </h3>
+      </li>
+      {% csrf_token%}
+    </form>
+    {% endfor %}
+    {% endif %}
+    {% if total_price %}
+    <li class="total-price">Total price: {{total_price}}$</li>
+    {% endif %}
+
+  </ul><br>
+  <form action="{% url 'Order' %}" method="POST">
+    <div class="store">
+      <label id="store-name">Store: </label>
+      <select class="store-select" name="store" required>
+        {%if stores%}
+        {%for store in stores%}
+        <option value="{{store.store_id}}">{{store.name}}</option>
+        {% endfor %}
+        {% endif %}
+      </select>
+    </div>
+    <div class="submit-button">
+      <button class="btn btn-primary" type="submit" name="submit-button" value="Submit">Submit</button>
+      <button class="btn btn-danger" name="checkout-order">Checkout</button>
+    </div>
+    {% csrf_token %}
+  </form>
+  </div>
+</div>
+<br>
+{% endblock %}

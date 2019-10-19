@@ -1,0 +1,101 @@
+{% extends "menuserver/base_menuserver_menu.html" %}
+{% load staticfiles%}
+{% block css %}<link rel="stylesheet" type="text/css" href="{% static 'css/menu_management.css' %}">{% endblock %}
+{% block extra_li %}
+<li><a href="{% url 'Menu' %}">Menu</a></li>
+<li><a href="{% url 'Order' %}">Order</a></li>
+{% endblock %}
+{% block class3 %}class="container"{% endblock %}
+{% block title %}Menu Management{% endblock %}
+{% block buttons1 %}
+<div class="buttons">
+  <form method="POST">
+    <a href="{% url 'Dish' %}" class="edit">
+      <button class="btn btn-primary" id="edit" type="submit" name="change-dish" value="edit">Edit</button>
+    </a>
+    <a href="{% url 'Menu Management' %}" class="delete">
+      <button class="btn btn-danger" id="delete" type="submit" name="change-dish" value="delete">Delete</button>
+    </a>
+    <input type="hidden" name="dish-id" value="{{item.id}}">
+    {% csrf_token%}
+  </form>
+</div>
+{% endblock %}
+{% block buttons2 %}
+<div class="buttons">
+  <form method="POST">
+    <a href="{% url 'Dish' %}" class="edit">
+      <button class="btn btn-primary" id="edit" type="submit" name="change-dish" value="edit">Edit</button>
+    </a>
+    <a href="{% url 'Menu Management' %}" class="delete">
+      <button class="btn btn-danger" id="delete" type="submit" name="change-dish" value="delete">Delete</button>
+    </a>
+    <input type="hidden" name="dish-id" value="{{item.id}}">
+    {% csrf_token%}
+  </form>
+</div>
+{% endblock %}
+{% block buttons3 %}
+<div class="buttons">
+  <form method="POST">
+    <a href="{% url 'Dish' %}" class="edit">
+      <button class="btn btn-primary" id="edit" type="submit" name="change-dish" value="edit">Edit</button>
+    </a>
+    <a href="{% url 'Menu Management' %}" class="delete">
+      <button class="btn btn-danger" id="delete" type="submit" name="change-dish" value="delete">Delete</button>
+    </a>
+    <input type="hidden" name="dish-id" value="{{item.id}}">
+    {% csrf_token%}
+  </form>
+</div>
+{% endblock %}
+{% block buttons4 %}
+<div class="buttons">
+  <form method="POST">
+    <a href="{% url 'Dish' %}" class="edit">
+      <button class="btn btn-primary" id="edit" type="submit" name="change-dish" value="edit">Edit</button>
+    </a>
+    <a href="{% url 'Menu Management' %}" class="delete">
+      <button class="btn btn-danger" id="delete" type="submit" name="change-dish" value="delete">Delete</button>
+    </a>
+    <input type="hidden" name="dish-id" value="{{item.id}}">
+    {% csrf_token%}
+  </form>
+</div>
+{% endblock %}
+{% block add_dish1 %}
+<div class="col-lg-4 col-sm-6">
+  <div class="thumbnail add-block">
+    <a href="{% url 'Dish' %}" class="add-dish">
+      <button class="btn btn-default add" name="add-dish">+</button>
+    </a>
+  </div>
+</div>
+{% endblock %}
+{% block add_dish2 %}
+<div class="col-lg-4 col-sm-6">
+  <div class="thumbnail add-block">
+    <a href="{% url 'Dish' %}" class="add-dish">
+      <button class="btn btn-default add" name="add-dish">+</button>
+    </a>
+  </div>
+</div>
+{% endblock %}
+{% block add_dish3 %}
+<div class="col-lg-4 col-sm-6">
+  <div class="thumbnail add-block">
+    <a href="{% url 'Dish' %}" class="add-dish">
+      <button class="btn btn-default add" name="add-dish">+</button>
+    </a>
+  </div>
+</div>
+{% endblock %}
+{% block add_dish4 %}
+<div class="col-lg-4 col-sm-6">
+  <div class="thumbnail add-block">
+    <a href="{% url 'Dish' %}" class="add-dish">
+      <button class="btn btn-default add" name="add-dish">+</button>
+    </a>
+  </div>
+</div>
+{% endblock %}

@@ -1,0 +1,27 @@
+{% extends "menuserver/base_menuserver.html" %}
+{% load staticfiles%}
+{% block css %}
+  <link rel="stylesheet" type="text/css" href="{% static 'css/main.css' %}">
+{% endblock %}
+{% block navbar %}
+  <li><a href="#">About us</a></li>
+  <li><a href="#">Address</a></li>
+  <li><a href="#">Contact</a></li>
+{% endblock %}
+{% block class3 %}class="container"{% endblock %}
+{% block title %}
+Mao's Restaurant
+{% endblock %}
+{% block content %}
+  <p>
+    Mao's rastaurant specializes in the freshest fish and seafood prepared withLatino – Caribbean flair, and features a wonderful oyster andceviche bar in front of the open kitchen. In 2003
+  </p>
+  <a href="{% url 'Menu' %}" id="button">
+    <button class="btn btn-lg menu">View Menu</button>
+  </a>
+  {% if user.is_authenticated %}
+  <a href="{% url 'Order' %}" id="button">
+    <button class="btn btn-lg order">Order</button>
+  </a>
+  {% endif %}
+{% endblock %}

@@ -1,0 +1,132 @@
+{% extends "menuserver/base_menuserver.html" %}
+{% load staticfiles%}
+{%block css%}{%endblock%}
+{% block navbar %}
+{% block extra_li %}{% endblock %}
+<li><a href="{% url 'Submitted Orders' %}">Submitted Orders</a></li>
+<li><a href="{% url 'Management' %}">Management</a></li>
+{% endblock %}
+{% block class1 %}{% endblock %}
+{% block class2 %}{% endblock %}
+{% block class3 %}{% endblock %}
+{% block title %}{% endblock %}
+{% block content %}
+<ul class="breadcrumb">
+  <li><a href="#" class="type">Main</a> </li>
+</ul>
+
+<div class="row">
+  {% if menu %}
+  {% for item in menu %}
+  {% if item.categary == "main" %}
+  <div class="col-lg-4 col-sm-6">
+    <div class="thumbnail">
+      <img src="{{item.photo_url}}">
+      <div>
+        <h2 class="name">
+          {{item.name}}
+        </h2>
+      </div>
+      <div>
+        <h2 class="price">
+          {{item.price}}$
+        </h2>
+      </div>
+      {% block buttons1 %}{% endblock %}
+    </div>
+  </div>
+  {% endif %}
+  {% endfor %}
+  {% endif %}
+  {% block add_dish1 %}{% endblock %}
+</div>
+<ul class="breadcrumb">
+    <li><a href="#" class="type">Pizza</a> </li>
+</ul>
+
+<div class="row">
+  {% if menu %}
+  {% for item in menu %}
+  {% if item.categary == "pizza" %}
+  <div class="col-lg-4 col-sm-6">
+    <div class="thumbnail">
+      <img src="{{item.photo_url}}">
+      <div>
+        <h2 class="name">
+          {{item.name}}
+        </h2>
+      </div>
+      <div>
+        <h2 class="price">
+          {{item.price}}$
+        </h2>
+      </div>
+      {% block buttons2 %}{% endblock %}
+    </div>
+  </div>
+  {% endif %}
+  {% endfor %}
+  {% endif %}
+  {% block add_dish2 %}{% endblock %}
+</div>
+
+<ul class="breadcrumb">
+    <li><a href="#" class="type">Burger</a> </li>
+</ul>
+
+    <div class="row">
+      {% if menu %}
+      {% for item in menu %}
+      {% if item.categary == "burger" %}
+      <div class="col-lg-4 col-sm-6">
+        <div class="thumbnail">
+          <img src="{{item.photo_url}}">
+          <div>
+            <h2 class="name">
+              {{item.name}}
+            </h2>
+          </div>
+          <div>
+            <h2 class="price">
+              {{item.price}}$
+            </h2>
+          </div>
+          {% block buttons3 %}{% endblock %}
+        </div>
+      </div>
+      {% endif %}
+      {% endfor %}
+      {% endif %}
+      {% block add_dish3 %}{% endblock %}
+    </div>
+
+<ul class="breadcrumb">
+    <li><a href="#" class="type">Beverage</a> </li>
+</ul>
+
+  <div class="row">
+    {% if menu %}
+    {% for item in menu %}
+    {% if item.categary == "beverage" %}
+    <div class="col-lg-4 col-sm-6">
+      <div class="thumbnail">
+        <img src="{{item.photo_url}}">
+        <div>
+          <h2 class="name">
+            {{item.name}}
+          </h2>
+        </div>
+        <div>
+          <h2 class="price">
+            {{item.price}}$
+          </h2>
+        </div>
+        {% block buttons4 %}{% endblock %}
+      </div>
+    </div>
+    {% endif %}
+    {% endfor %}
+    {% endif %}
+    {% block add_dish4 %}{% endblock %}
+  </div>
+{% endblock %}
