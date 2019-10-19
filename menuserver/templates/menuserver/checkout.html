@@ -1,17 +1,18 @@
 {% extends "menuserver/base_menuserver_so.html" %}
 {% load staticfiles%}
-{% block css %}<link rel="stylesheet" type="text/css" href="{% static 'css/submitted_order.css' %}">{% endblock %}
+{% block css %}<link rel="stylesheet" type="text/css" href="{% static 'css/checkout.css' %}">{% endblock %}
 
 {% block title %}Order Status{% endblock %}
 
 {% block thumbnail1 %}
     <div>
-      <ul class="breadcrumb">
-       <li class='type'>Processing Orders</li>
-      </ul>
+      <div>
+        <h2> Processing orders </h2>
+      </div>
+      <div>
       {% if processing_order %}
       {% for s in processing_order %}
-      <div class="col-lg-6">
+      <div class="col-lg-12">
         <div class="thumbnail">
           <div class="dropdown">
             <ul class="breadcrumb dropdown-toggle" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
@@ -23,6 +24,8 @@
               <li class="number">{{o.num}}</li>
               <li class="divider"></li>
               {% endfor %}
+              <li class="dish-name"><b>Store:</b> {{s.store.name}}</li>
+              <li class="divider"></li>
             </ul>
           </div>
         </div>
@@ -31,12 +34,13 @@
       {% endif %}
     </div>
     <div>
-      <ul class="breadcrumb">
-       <li class='type'>Fulfilled Orders </li>
-      </ul>
+      <div>
+        <h2> Fulfilled orders </h2>
+      </div>
+      <div>
       {% if fulfilled_order %}
       {% for s in fulfilled_order %}
-      <div class="col-lg-6">
+      <div class="col-lg-12">
         <div class="thumbnail">
           <div class="dropdown">
             <ul class="breadcrumb dropdown-toggle" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
@@ -48,20 +52,24 @@
               <li class="number">{{o.num}}</li>
               <li class="divider"></li>
               {% endfor %}
+              <li class="dish-name"><b>Store:</b> {{s.store.name}}</li>
+              <li class="divider"></li>
             </ul>
           </div>
         </div>
       </div>
       {% endfor %}
       {% endif %}
+      </div>
     </div>
     <div>
-      <ul class="breadcrumb">
-       <li class='type'>Declined Orders</li>
-      </ul>
+      <div>
+      <h2> Declined orders </h2>
+      </div>
+      <div>
       {% if declined_order %}
       {% for s in declined_order %}
-      <div class="col-lg-6">
+      <div class="col-lg-12">
         <div class="thumbnail">
           <div class="dropdown">
             <ul class="breadcrumb dropdown-toggle" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
@@ -73,11 +81,14 @@
               <li class="number">{{o.num}}</li>
               <li class="divider"></li>
               {% endfor %}
+              <li class="dish-name"><b>Store:</b> {{s.store.name}}</li>
+              <li class="divider"></li>
             </ul>
           </div>
         </div>
       </div>
       {% endfor %}
       {% endif %}
+      </div>
     </div>
 {% endblock %}

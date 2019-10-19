@@ -394,7 +394,7 @@ def order(request):
 def submitted_order(request):
     if request.method == 'GET':
         current_user = request.user
-        if current_user.is_authenticated() and current_user.role.role != 'C':
+        if current_user.is_authenticated and current_user.roles.role != 'C':
             stores = Stores.objects.order_by('store_id')
             return render(request, 'menuserver/submitted_order.html', {'stores': stores})
         else:
