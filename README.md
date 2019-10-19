@@ -33,13 +33,12 @@ log in as employee: three buttons: View Menu, Make an order, Submitted Orders
 
 2. Menu page
 
-User can view the menu of the stores. Since all the stores share the same menu, there's no store selector there.
+User can view the menu of the stores without logging in. Since all the stores share the same menu, there's no store selector there.
 
-The link http://localhost:8000/menu is directed to this page. The navbar on the top have five anchors: Mao's restaurant, Menu Management, Order, Submitted Orders and Management, which are directed to the main page, the menu management page, the order page, the submitted orders page and the management page respectively.
 
 3. Menu Management page
 
-User can edit/delete/create dishes there.
+User can edit/delete/create dishes there. The user must have a role of 'Manager'
 
 In every dish block, there are two buttons: Edit and Delete. Clicking the Delete button, the dish will be deleted from the database and disappear from the page. Clicking the Edit button, it will be directed to a new page where you can modify the dish's category, name, price and re-choose a picture for the dish. Clicking the Submit button on that page will edit the dish to a new one.
 
@@ -47,7 +46,7 @@ At the end of each dish category, there's an empty block with a large + button, 
 
 4. Order page
 
-User can see the menu, order the dish they want and submit the orders.
+User must log in  see the menu, order the dish they want and submit the orders.
 
 The menu on the right shows the dishes of the restaurants and user can add the dish they want by clicking the add button.
 
@@ -57,7 +56,7 @@ User can choose the store they are ordering from and enter their username to sub
 
 5. Submitted Order page
 
-User can see the submitted orders on this page.
+User can see the submitted orders on this page. The user must have a role of 'Employee' or 'Mana'
 
 On that page, under the title "Submitted Orders", there's a button group showing all the stores. By clicking on different buttons, the page will show the submitted orders form different stores respectively.
 
@@ -69,13 +68,13 @@ There are two buttons: Fulfill and Decline on the dropdown menu. By clicking eit
 
 6. Management page
 
-User can edit/create/delete stores, managers, employees on this page and also can change the relationship among the three.
+User can edit/create/delete stores, managers, employees on this page and also can change the relationship among the three. The user must have a role of 'Manager'.
 
 There are three parts on the page: Stores, Managers and Employees.
 
 Stores:
 
-One block shows the information of one store including the store ID, name, address and the managers and employees belonged to that store. The title "Managers / Employees" is a dropdown menu. By clicking on that, it will show the managers and employees in that store.
+One block shows the information of one store including the store ID, name, address and the managers and employees belonged to that store. 
 
 On the left top of every block, there are two buttons: Edit and Delete. By clicking Delete, it will delete the store both from the page and the database. Clicking the Edit button, it will be directed to a new page, where you can change the name, address and the manegers & employees of the store.
 
