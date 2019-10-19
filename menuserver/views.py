@@ -307,12 +307,15 @@ def order(request):
 
     stores = Stores.objects.order_by('store_id')
     if request.method == 'GET':
-        menu = Dishes.objects.order_by('name')
-        orders = Orders.objects.filter(username=request.user.username, is_submitted=False)
-        total_price = 0
-        for o in orders:
-            total_price += o.dish.price * o.num
-        return render(request, 'menuserver/order.html', {'menu' : menu, 'orders' : orders, 'stores' : stores, 'total_price' : total_price})
+        if request.user.is_authenticated:
+            menu = Dishes.objects.order_by('name')
+            orders = Orders.objects.filter(username=request.user.username, is_submitted=False)
+            total_price = 0
+            for o in orders:
+                total_price += o.dish.price * o.num
+            return render(request, 'menuserver/order.html', {'menu' : menu, 'orders' : orders, 'stores' : stores, 'total_price' : total_price})
+        else:
+            return render(request, 'menuserver/error.html', {})
     if request.method == 'POST':
         if "increase-num" in request.POST:
             order = Orders.objects.filter(dish=Dishes.objects.get(name=request.POST["increase-num"]), username=request.user.username, is_submitted=False)
