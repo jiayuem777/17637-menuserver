@@ -6,7 +6,9 @@
 
 {% block thumbnail1 %}
     <div>
-      <h1>Processing orders</h1>
+      <ul class="breadcrumb">
+       <li class='type'>Processing Orders</li>
+      </ul>
       {% if processing_order %}
       {% for s in processing_order %}
       <div class="col-lg-6">
@@ -29,7 +31,9 @@
       {% endif %}
     </div>
     <div>
-      <h1>Fulfilled orders</h1>
+      <ul class="breadcrumb">
+       <li class='type'>Fulfilled Orders </li>
+      </ul>
       {% if fulfilled_order %}
       {% for s in fulfilled_order %}
       <div class="col-lg-6">
@@ -52,7 +56,9 @@
       {% endif %}
     </div>
     <div>
-      <h1>Declined orders</h1>
+      <ul class="breadcrumb">
+       <li class='type'>Declined Orders</li>
+      </ul>
       {% if declined_order %}
       {% for s in declined_order %}
       <div class="col-lg-6">
