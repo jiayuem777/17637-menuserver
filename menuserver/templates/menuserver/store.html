@@ -4,6 +4,7 @@
 {%block title%}Store{%endblock%}
 {%block form_content%}
   <form action="{% url 'Management' %}" method="POST">
+    {% csrf_token %}
     <div class="store-id">
       <label class="label" id="store-id">Store ID: </label>
       <input type="text" placeholder="ID" class="form-control" name="store-id" {% if store_id %}value="{{store_id}}" readonly="readonly"{%endif%} required>
@@ -16,6 +17,11 @@
       <label class="label" id="address-label">Address: </label>
       <input type="text" class="form-control" placeholder="Address" id="address-enter" name="store-address" {% if address %}value="{{address}}"{%endif%} required>
     </div>
-    {% csrf_token %}
+
+    <div>
+      <a href="{% url 'Management' %}">
+        <button type="submit" name="submit" {%if store_id%}value="edit-store" {%else%}value="new-store"{%endif%} class="btn btn-default">Submit</button>
+      </a>
+    </div>
   </form>
 {% endblock %}
