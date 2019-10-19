@@ -3,3 +3,4 @@ psycopg2-binary
 whitenoise
 bcrypt
 django[argon2]
+argon2

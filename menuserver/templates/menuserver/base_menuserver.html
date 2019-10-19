@@ -19,7 +19,7 @@
         </ul>
         <ul class="nav navbar-nav navbar-right">
           {% if user.is_authenticated %}
-          <li id="identity"><a href="#">Hello, {{user.username}}</a></li>
+          <li id="identity"><a href="#">Hello, {{user.first_name}} {{user.last_name}}</a></li>
           <li><a href="{% url 'Logout' %}">Log out</a></li>
           {% else %}
           <li><a class="nav-link" href="{% url 'Register' %}">Register</a></li>
