@@ -10,6 +10,11 @@ from django.http import HttpResponseRedirect, HttpResponse
 from django.urls import reverse
 from django.contrib.auth.decorators import login_required
 
+from django.contrib.auth.models import Permission, User
+from django.contrib.contenttypes.models import ContentType
+from django.shortcuts import get_object_or_404
+from django.contrib.auth.models import Group
+
 # Create your views here.
 def main(request):
     current_user = request.user
@@ -152,6 +157,8 @@ def store_manager_employee(request):
                 if request.POST['change-manager'] == 'delete':
                     manager.role = 'C'
                     manager.save()
+                    my_group = Group.objects.get(name='manager')
+                    my_group.user_set.remove(manager.user)
                     stores = Stores.objects.order_by('store_id')
                     managers = Roles.objects.filter(role='M')
                     employees = Roles.objects.filter(role='E')
@@ -169,6 +176,8 @@ def store_manager_employee(request):
                 if request.POST['change-employee'] == 'delete':
                     employee.role = 'C'
                     employee.save()
+                    my_group = Group.objects.get(name='employee')
+                    my_group.user_set.remove(employee.user)
                     stores = Stores.objects.order_by('store_id')
                     managers = Roles.objects.filter(role='M')
                     employees = Roles.objects.filter(role='E')
@@ -197,6 +206,8 @@ def store_manager_employee(request):
                         us = User.objects.get(username=username)
                         us.roles.role = "M"
                         us.roles.save()
+                        my_group = Group.objects.get(name='manager')
+                        my_group.user_set.add(us)
                         store_id_list = request.POST.getlist('choose-manager-store')
                         manager = us.roles
                         for s in Stores.objects.all():
@@ -216,6 +227,8 @@ def store_manager_employee(request):
                         us = User.objects.get(username=username)
                         us.roles.role = "E"
                         us.roles.save()
+                        my_group = Group.objects.get(name='employee')
+                        my_group.user_set.add(us)
                         store_id_list = request.POST.getlist('choose-employee-store')
                         employee = us.roles
                         store_id_list = request.POST.getlist('choose-employee-store')
@@ -269,6 +282,8 @@ def manager(request):
                 manager = Roles.objects.get(user=User.objects.get(username=username))
                 manager.role = 'M'
                 manager.save()
+                my_group = Group.objects.get(name='manager')
+                my_group.user_set.add(us)
                 store_id_list = request.POST.getlist('choose-manager-store')
                 for s in Stores.objects.all():
                     manager.stores.remove(s)
@@ -291,6 +306,8 @@ def employee(request):
                 employee = User.objects.get(username=username).roles
                 employee.role = 'E'
                 employee.save()
+                my_group = Group.objects.get(name='employee')
+                my_group.user_set.add(us)
                 store_id_list = request.POST.getlist('choose-employee-store')
                 for s in Stores.objects.all():
                     employee.stores.remove(s)
@@ -460,6 +477,9 @@ def register(request):
             if "repeat-password" in request.POST and  user.password == request.POST["repeat-password"]:
                 user.set_password(user.password)
                 user.save()
+                my_group = Group.objects.get(name='customer')
+                my_group.user_set.add(user)
+
                 user_role = Roles(user=user, role='C')
                 user_role.save()
                 login(request, user)
@@ -491,6 +511,7 @@ def user_login(request):
                 if user.is_active:
                     # Log the user in.
                     login(request, user)
+                    #print(user.has_perm("dish.can_add_dish"))
                     # Send the user back to some page.
                     # In this case their homepage.
                     if user.roles.role == 'M':
