@@ -166,8 +166,8 @@ def store_manager_employee(request):
                                  {'stores' : stores, 'managers' : managers, 'employees' : employees})
         if "change-employee" in request.POST and "change-employee-id" in request.POST:
             id = request.POST["change-employee-id"]
-            if Roles.objects.get(id).exists():
-                employee = Roles.objects.get(id)
+            if Roles.objects.get(id=id).exists():
+                employee = Roles.objects.get(id=id)
                 stores = employee.stores.all()
                 all_stores = Stores.objects.order_by('store_id')
                 context = {'employee_user' : employee.user, 'stores' : stores, 'all_stores' : all_stores}
