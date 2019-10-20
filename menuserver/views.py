@@ -166,23 +166,22 @@ def store_manager_employee(request):
                                  {'stores' : stores, 'managers' : managers, 'employees' : employees})
         if "change-employee" in request.POST and "change-employee-id" in request.POST:
             id = request.POST["change-employee-id"]
-            if Roles.objects.get(id=id).exists():
-                employee = Roles.objects.get(id=id)
-                stores = employee.stores.all()
-                all_stores = Stores.objects.order_by('store_id')
-                context = {'employee_user' : employee.user, 'stores' : stores, 'all_stores' : all_stores}
-                if request.POST['change-employee'] == 'edit':
-                    return render(request, 'menuserver/employee.html', context)
-                if request.POST['change-employee'] == 'delete':
-                    employee.role = 'C'
-                    employee.save()
-                    my_group = Group.objects.get(name='employee')
-                    my_group.user_set.remove(employee.user)
-                    stores = Stores.objects.order_by('store_id')
-                    managers = Roles.objects.filter(role='M')
-                    employees = Roles.objects.filter(role='E')
-                    return render(request, 'menuserver/store_manager_employee.html',
-                                 {'stores' : stores, 'managers' : managers, 'employees' : employees})
+            employee = Roles.objects.get(id=id)
+            stores = employee.stores.all()
+            all_stores = Stores.objects.order_by('store_id')
+            context = {'employee_user' : employee.user, 'stores' : stores, 'all_stores' : all_stores}
+            if request.POST['change-employee'] == 'edit':
+                return render(request, 'menuserver/employee.html', context)
+            if request.POST['change-employee'] == 'delete':
+                employee.role = 'C'
+                employee.save()
+                my_group = Group.objects.get(name='employee')
+                my_group.user_set.remove(employee.user)
+                stores = Stores.objects.order_by('store_id')
+                managers = Roles.objects.filter(role='M')
+                employees = Roles.objects.filter(role='E')
+                return render(request, 'menuserver/store_manager_employee.html',
+                             {'stores' : stores, 'managers' : managers, 'employees' : employees})
         if "submit" in request.POST:
             if request.POST['submit'] == 'edit-store':
                 if 'store-id' in request.POST:
