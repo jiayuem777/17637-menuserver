@@ -18,6 +18,10 @@ Submitted order page: http://maojoymenuserverhw5.azurewebsites.net/submitted_ord
 
 Management page: http://maojoymenuserverhw5.azurewebsites.net/store_manager_employee/
 
+To jump to other page, you can click the anchor "Mao's rastaurant" on the left top of navbar and back to the main page. Then there are buttons which can direct you to other pages.
+
+The manager can change user's role in the Management page, where he can add a new manager/employee (which means make a customer to be a manager or employee) or delete a manager/employee (which means make users with role of manager/employee to be a customer)
+
 1. Main page
 
 The main page of the Menuserver system.
@@ -74,7 +78,7 @@ There are three parts on the page: Stores, Managers and Employees.
 
 Stores:
 
-One block shows the information of one store including the store ID, name, address and the managers and employees belonged to that store. 
+One block shows the information of one store including the store ID, name, address and the managers and employees belonged to that store.
 
 On the left top of every block, there are two buttons: Edit and Delete. By clicking Delete, it will delete the store both from the page and the database. Clicking the Edit button, it will be directed to a new page, where you can change the name, address and the manegers & employees of the store.
 
