@@ -1,6 +1,5 @@
 from django.test import TestCase, LiveServerTestCase, Client, override_settings
 from selenium import webdriver
-from webdriver_manager.chrome import ChromeDriverManager
 from selenium.webdriver.support.ui import Select
 import time
 from selenium.webdriver.common.keys import Keys
@@ -12,7 +11,7 @@ from django.core.files.uploadedfile import SimpleUploadedFile
 # Create your tests here.
 class UserTestCase(LiveServerTestCase):
     def setUp(self):
-        self.selenium = webdriver.Chrome(ChromeDriverManager().install())
+        self.selenium = webdriver.Chrome()
 
     def tearDown(self):
         self.selenium.quit()
@@ -71,7 +70,7 @@ class UserTestCase(LiveServerTestCase):
 class MenuManagementTestCase(LiveServerTestCase):
 
     def setUp(self):
-        self.selenium = webdriver.Chrome(ChromeDriverManager().install())
+        self.selenium = webdriver.Chrome()
 
     def tearDown(self):
         self.selenium.quit()
@@ -152,7 +151,7 @@ class DishTestCase(LiveServerTestCase):
 class OrderTestCase(LiveServerTestCase):
 
     def setUp(self):
-        self.selenium = webdriver.Chrome(ChromeDriverManager().install())
+        self.selenium = webdriver.Chrome()
 
     def tearDown(self):
         self.selenium.quit()
@@ -198,7 +197,7 @@ class OrderModelTestCase(LiveServerTestCase):
 class SubmittedOrderTestCase(LiveServerTestCase):
 
     def setUp(self):
-        self.selenium = webdriver.Chrome(ChromeDriverManager().install())
+        self.selenium = webdriver.Chrome()
 
     def tearDown(self):
         self.selenium.quit()
@@ -288,7 +287,7 @@ class SubmittedOrderModelTestCase(LiveServerTestCase):
 class StoreTestCase(LiveServerTestCase):
 
     def setUp(self):
-        self.selenium = webdriver.Chrome(ChromeDriverManager().install())
+        self.selenium = webdriver.Chrome()
 
     def tearDown(self):
         self.selenium.quit()
@@ -378,7 +377,7 @@ class RoleTestCase(LiveServerTestCase):
 class ManagerTestCase(LiveServerTestCase):
 
     def setUp(self):
-        self.selenium = webdriver.Chrome(ChromeDriverManager().install())
+        self.selenium = webdriver.Chrome()
 
     def tearDown(self):
         self.selenium.quit()

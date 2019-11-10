@@ -2,4 +2,4 @@ Django==2.2.5
 psycopg2-binary
 whitenoise
 selenium
-webdriver-manager
+chromedriver 
