@@ -55,6 +55,12 @@ steps:
     python manage.py test --testrunner xmlrunner.extra.djangotestrunner.XMLTestRunner --no-input
   displayName: 'Run tests'
 
+- script: |
+    git checkout hw6_deployment
+    git push https://maojoy777:$(gitPassword)@maojoymenuserverhw5.scm.azurewebsites.net:443/maojoymenuserverhw5.git hw6_deployment:master
+  displayName: 'Push to Azure'
+
+
 - task: PublishTestResults@2
   inputs:
     testResultsFiles: "**/TEST-*.xml"
