@@ -39,6 +39,11 @@ urlpatterns = [
     url(r'^logout/', views.user_logout, name='Logout'),
     url(r'^error/', views.error, name='Error'),
     url(r'^admin/', admin.site.urls),
+    url(r'^ajax_post/', views.ajax_post, name='ajax_post'),
+    url(r'^ajax_increase/', views.ajax_increase, name='ajax_increase'),
+    url(r'^ajax_decrease/', views.ajax_decrease, name='ajax_decrease'),
+    url(r'^ajax_reload/', views.ajax_reload, name='ajax_reload'),
+    url(r'^ajax_addOrder/', views.ajax_addOrder, name='ajax_addOrder'),
     # url(r'^media/(?P<path>.*)$', serve, {'document_root':settings.MEDIA_ROOT}),　　#这部分很重要
 
 ]

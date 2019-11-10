@@ -59,10 +59,10 @@
     <div class="buttons">
       <form action="{% url 'Management' %}" method='POST'>
         <a href="{% url 'Manager' %}" class="edit">
-          <button class="btn btn-primary" id="edit" type="submit" name="change-manager" value="edit">Edit</button>
+          <button class="btn btn-primary" id="edit-manager" type="submit" name="change-manager" value="edit">Edit</button>
         </a>
         <a href="{% url 'Management' %}" class="delete">
-          <button class="btn btn-danger" id="delete" type="submit" name="change-manager" value="delete">Delete</button>
+          <button class="btn btn-danger" id="delete-manager" type="submit" name="change-manager" value="delete">Delete</button>
         </a>
         <input type="hidden" name='change-manager-id' value={{m.id}}>
       {% csrf_token %}
@@ -91,7 +91,7 @@
   <div class="col-lg-6">
     <div class="thumbnail manager-thumbnail add-block-m">
       <a href="{% url 'Manager' %}" class="add-manager">
-        <button class="btn btn-default add-m">+</button>
+        <button class="btn btn-default add-m" id="add-manager">+</button>
       </a>
     </div>
   </div>

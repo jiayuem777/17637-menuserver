@@ -14,10 +14,14 @@
       </div>
       {% csrf_token %}
       </form>
+      {% if saved_store %}
+      <input type="hidden" id="saved-store" name="saved-store" value="{{saved_store.store_id}}">
+      {% endif %}
     </div>
 {% endblock %}
 
 {% block thumbnail1 %}
+<meta name="csrf-token" content="{{ csrf_token }}">
       {% if submitted_order %}
       {% for s in submitted_order %}
       <div class="col-lg-6">
@@ -26,6 +30,8 @@
             <ul class="breadcrumb dropdown-toggle" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
               <li><a href="#" class="order-title">Order ID: {{s.order_id}}</a> </li>
               <li><a href="#" class="order-title">Username: {{s.username}}</a> </li>
+              <input type="hidden" class="order-id-input" value="{{s.order_id}}">
+              <input type="hidden" class="order-username-input" value="{{s.username}}">
             </ul>
             <ul class="dropdown-menu order-dropdown" aria-labelledby="dropdownMenu1">
               {% for o in s.order.all %}
@@ -48,4 +54,145 @@
       </div>
       {% endfor %}
       {% endif %}
+{% endblock %}
+
+{% block js %}
+<script type="text/javascript">
+
+  setTimeout(function(){
+     reloadFunc();
+   }, 5000);
+
+  function reloadFunc() {
+    setTimeout(reloadFunc, 5000);
+    $.ajax({
+      type:"POST",
+      url:'{% url 'ajax_reload' %}',
+      data: {
+        store_id: $("#saved-store").val(),
+        csrfmiddlewaretoken:$('input[name=csrfmiddlewaretoken]').val()
+      },
+      success:function(result){
+        submitted_order = result["data"];
+        console.log(submitted_order);
+        for (var i = 0; i < submitted_order.length; i++) {
+          var order_id = $('.order-id-input');
+          var order_username = $('.order-username-input');
+          var exist = false;
+          for (var j = 0; j < order_id.length; j++) {
+            if (order_id[j].value == submitted_order[i].fields.order_id && order_username[j].value == submitted_order[i].fields.username) {
+              exist = true;
+              break;
+            }
+          }
+          if (!exist) {
+            addOrder(submitted_order[i].fields);
+          }
+        }
+      }
+
+    });
+  }
+
+  function addOrder(submitted_order) {
+
+    $.ajax({
+      type:"POST",
+      url:'{% url 'ajax_addOrder' %}',
+      data: {
+        order_id: submitted_order.order_id,
+        username: submitted_order.username,
+        csrfmiddlewaretoken:$('input[name=csrfmiddlewaretoken]').val()
+      },
+      success:function(result){
+        orders = result['orders'];
+        dish = result['dish'];
+        console.log(orders);
+        var div1 = $("<div></div>")
+        .addClass("col-lg-6").appendTo("#order-thumbnail");
+        var div2 = $("<div></div>")
+        .addClass("thumbnail").appendTo(div1);
+        var div3 = $("<div></div>")
+        .addClass("dropdown").appendTo(div2);
+        var ul1 = $("<ul/>", {
+          "class": "breadcrumb dropdown-toggle",
+          id: "dropdownMenu1",
+          "data-toggle": "dropdown",
+          "aria-haspopup": "true",
+          "aria-expanded": "true"
+        }).appendTo(div3);
+
+        var li11 = $("<li></li>").appendTo(ul1);
+        var li12 = $("<li></li>").appendTo(ul1);
+        var a1 = $("<a/>", {
+          "class": "order-title",
+          html: "Order ID: " + submitted_order.order_id
+        }).appendTo(li11);
+        var a2 = $("<a/>", {
+          "class": "order-title",
+          html: "Username: " + submitted_order.username
+        }).appendTo(li12);
+
+        var input1 = $("<input/>", {
+          type: "hidden",
+          "class": "order-id-input"
+        }).val(submitted_order.order_id).appendTo(ul1);
+        var input2 = $("<input/>", {
+          type: "hidden",
+          "class": "order-username-input"
+        }).val(submitted_order.username).appendTo(ul1);
+
+
+
+        var ul2 = $("<ul/>", {
+          "class": "dropdown-menu order-dropdown",
+          id: "dropdownMenu1",
+          "aria-labelledby": "dropdownMenu1"
+        }).appendTo(div3);
+
+        for (var i = 0; i < orders.length; i++) {
+          $("<li/>", {
+            "class": "dish-name",
+            html: dish[i].fields.name
+          }).appendTo(ul2);
+          $("<li/>", {
+            "class": "number",
+            html: orders[i].fields.num
+          }).appendTo(ul2);
+          $("<li class='divider'></li>").appendTo(ul2);
+        }
+
+        var divBtn = $("<div class='buttons'></div>").appendTo(ul2);
+        var form = $("<form/>", {
+          "action": "{% url 'Submitted Orders' %}",
+          "method": 'POST',
+          id: "btnForm"
+        }).appendTo(divBtn);
+        //csrf_token
+        var csrfVar = $('meta[name="csrf-token"]').attr('content');
+        form.append("<input name='csrfmiddlewaretoken' value='" + csrfVar + "' type='hidden'>");
+        var btn1 = $("<button/>", {
+          "class": "btn btn-primary complete",
+          type: "submit",
+          name: "order-choice",
+          html: "Fulfill"
+        }).val("fulfill").appendTo(form);
+        var btn2 = $("<button/>", {
+          "class": "btn btn-danger decline",
+          type: "submit",
+          name: "order-choice",
+          html: "Decline"
+        }).val("decline").appendTo(form);
+        var input = $("<input/>", {
+          type: "hidden",
+          name: 'submitted-order-id'
+        }).val(submitted_order.order_id).appendTo(form);
+      }
+
+
+    });
+  }
+
+</script>
+
 {% endblock %}

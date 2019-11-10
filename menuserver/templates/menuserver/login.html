@@ -12,11 +12,11 @@
   {% endif %}
   <div>
     <label class="label">Username: </label>
-    <input type="text" class="form-control" name="username" placeholder="Username" {% if username %}value={{username}}{% endif %}>
+    <input type="text" class="form-control" name="username" id="username" placeholder="Username" {% if username %}value={{username}}{% endif %}>
   </div>
   <div>
     <label class="label">Password: </label>
-    <input type="password" class="form-control" name="password" placeholder="Password" {% if password %}value={{password}}{% endif %}>
+    <input type="password" class="form-control" name="password" id="password" placeholder="Password" {% if password %}value={{password}}{% endif %}>
   </div>
   <div>
     <input type="submit" class="btn btn-default" name="login-submit" value="Login">

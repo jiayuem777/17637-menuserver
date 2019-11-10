@@ -49,10 +49,10 @@
 <div class="buttons">
   <form method="POST">
     <a href="{% url 'Dish' %}" class="edit">
-      <button class="btn btn-primary" id="edit" type="submit" name="change-dish" value="edit">Edit</button>
+      <button class="btn btn-primary" id="edit-dish" type="submit" name="change-dish" value="edit">Edit</button>
     </a>
     <a href="{% url 'Menu Management' %}" class="delete">
-      <button class="btn btn-danger" id="delete" type="submit" name="change-dish" value="delete">Delete</button>
+      <button class="btn btn-danger" id="delete-dish" type="submit" name="change-dish" value="delete">Delete</button>
     </a>
     <input type="hidden" name="dish-id" value="{{item.id}}">
     {% csrf_token%}
@@ -63,7 +63,7 @@
 <div class="col-lg-4 col-sm-6">
   <div class="thumbnail add-block">
     <a href="{% url 'Dish' %}" class="add-dish">
-      <button class="btn btn-default add" name="add-dish">+</button>
+      <button class="btn btn-default add" id="add-dish" name="add-dish">+</button>
     </a>
   </div>
 </div>

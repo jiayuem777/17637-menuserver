@@ -7,91 +7,218 @@
 {% block title %}Menu{% endblock %}
 {% block buttons1 %}
 <div class="buttons">
-  <form method="POST">
-    <a href="{% url 'Order' %}" class="add-dish">
-      <button class="btn btn-danger" type="submit" name="add-dish" value="add">Add</button>
-    </a>
-    <input type="hidden" name="dish-name" value="{{item.name}}">
-    {% csrf_token %}
-  </form>
+    <button class="btn btn-danger add-dish" type="submit" name="add-dish" value="{{item.name}}">Add</button>
 </div>
+
 {% endblock %}
 {% block buttons2 %}
 <div class="buttons">
-  <form method="POST">
-    <a href="{% url 'Order' %}" class="add-dish">
-      <button class="btn btn-danger" type="submit" name="add-dish" value="add">Add</button>
-    </a>
-    <input type="hidden" name="dish-name" value="{{item.name}}">
-    {% csrf_token %}
-  </form>
+    <button class="btn btn-danger add-dish" type="submit" name="add-dish" value="{{item.name}}">Add</button>
 </div>
+
 {% endblock %}
 {% block buttons3 %}
 <div class="buttons">
-  <form method="POST">
-    <a href="{% url 'Order' %}" class="add-dish">
-      <button class="btn btn-danger" type="submit" name="add-dish" value="add">Add</button>
-    </a>
-    <input type="hidden" name="dish-name" value="{{item.name}}">
-    {% csrf_token %}
-  </form>
+    <button class="btn btn-danger add-dish" type="submit" name="add-dish" value="{{item.name}}">Add</button>
 </div>
 {% endblock %}
 {% block buttons4 %}
 <div class="buttons">
-  <form method="POST">
-    <a href="{% url 'Order' %}" class="add-dish">
-      <button class="btn btn-danger" type="submit" name="add-dish" value="add">Add</button>
-    </a>
-    <input type="hidden" name="dish-name" value="{{item.name}}">
-    {% csrf_token %}
-  </form>
+    <button class="btn btn-danger add-dish" type="submit" name="add-dish" value="{{item.name}}">Add</button>
 </div>
 {% endblock %}
 {% block sidebar %}
 <div class="sidenav hidden-xs">
   <div class="order-part">
-  <ul class="nav nav-pills nav-stacked">
-    <h2 id="order-title">Order</h2>
-    {% if orders %}
-    {% for order in orders%}
+    <br><br><br>
+    <h3 id="order-title">Order</h3>
+    <hr>
+    <ul class="nav nav-pills nav-stacked" id="sidebar-ul">
+      {% for o in orders %}
+        <li id={{o.dish.name}}>
+          <span class="dish-name">{{o.dish.name}}</span>
+          <br>
+          <button class="btn btn-default increase-btn" value="{{o.dish.name}}">+</button>
+          <span class="dish-number">{{o.num}}</span>
+          <button class="btn btn-default decrease-btn" value="{{o.dish.name}}">-</button>
+          <hr>
+        </li>
+      {% endfor %}
+    </ul>
+    <h3 id="total-price"></h3>
+    <br>
     <form action="{% url 'Order' %}" method="POST">
-      <li class="order-line">
-        <h3 class="dish">{{order.dish.name}}</h3>
-        <h3 class="number">
-          <button class="btn btn-default" type="submit" name="increase-num" value="{{order.dish.name}}">+</button>
-          {{order.num}}
-          <button class="btn btn-default" type="submit" name="decrease-num" value="{{order.dish.name}}">-</button>
-        </h3>
-      </li>
-      {% csrf_token%}
+      {% csrf_token %}
+      <div class="store">
+        <label id="store-name">Store: </label>
+        <select class="store-select" name="store" required>
+          {%if stores%}
+          {%for store in stores%}
+          <option value="{{store.store_id}}">{{store.name}}</option>
+          {% endfor %}
+          {% endif %}
+        </select>
+      </div>
+      <div class="submit-button">
+          <button class="btn btn-primary" id="submit" type="submit" name="submit-button" value="Submit">Submit</button>
+          <button class="btn btn-danger" name="checkout-order">Checkout</button>
+      </div>
     </form>
-    {% endfor %}
-    {% endif %}
-    {% if total_price %}
-    <li class="total-price">Total price: {{total_price}}$</li>
-    {% endif %}
-
-  </ul><br>
-  <form action="{% url 'Order' %}" method="POST">
-    <div class="store">
-      <label id="store-name">Store: </label>
-      <select class="store-select" name="store" required>
-        {%if stores%}
-        {%for store in stores%}
-        <option value="{{store.store_id}}">{{store.name}}</option>
-        {% endfor %}
-        {% endif %}
-      </select>
-    </div>
-    <div class="submit-button">
-      <button class="btn btn-primary" type="submit" name="submit-button" value="Submit">Submit</button>
-      <button class="btn btn-danger" name="checkout-order">Checkout</button>
-    </div>
-    {% csrf_token %}
-  </form>
   </div>
 </div>
 <br>
+{% endblock %}
+
+{% block js %}
+<script type="text/javascript">
+  var increBtns = document.getElementsByClassName('increase-btn');
+  for (var i = 0; i < increBtns.length; i++) {
+    increBtns[i].addEventListener('click', increase);
+  }
+
+  var decreBtns = document.getElementsByClassName('decrease-btn');
+  for (var i = 0; i < decreBtns.length; i++) {
+    decreBtns[i].addEventListener('click', decrease);
+  }
+
+  $(".add-dish").click(function(){
+    $.ajax({
+      type:"POST",
+      url:'{% url 'ajax_post' %}',
+      data: {
+        name: $(this).val(),
+        csrfmiddlewaretoken:$('input[name=csrfmiddlewaretoken]').val()
+      },
+      success:function(data){
+        AddFunc(data);
+      }
+
+    });
+  });
+
+  function AddFunc(ret) {
+    var name = ret['name'];
+    var number = ret['number'];
+    var total_price = ret['total_price'];
+    var exist = ret['exist'];
+
+    if (!exist) {
+      var dishName = document.createElement("span");
+      var node1 = document.createTextNode(name);
+      dishName.appendChild(node1);
+      dishName.setAttribute("class", "dish-name");
+
+      var br = document.createElement("br");
+
+      var increaseBtn = document.createElement("button");
+      increaseBtn.innerHTML = "+";
+      increaseBtn.addEventListener('click', increase);
+      increaseBtn.setAttribute("class", "btn btn-default increase-btn");
+      increaseBtn.value = name;
+
+      var dishNumber = document.createElement("span");
+      var node2 = document.createTextNode(number);
+      dishNumber.appendChild(node2);
+      dishNumber.setAttribute("class", "dish-number");
+
+      var decreaseBtn = document.createElement("button");
+      decreaseBtn.innerHTML = "-";
+      decreaseBtn.addEventListener('click', decrease);
+      decreaseBtn.setAttribute("class", "btn btn-default decrease-btn");
+      decreaseBtn.value = name;
+
+      var hr = document.createElement("hr");
+
+      var newLine = document.createElement("li");
+      newLine.appendChild(dishName);
+      newLine.appendChild(br);
+      newLine.appendChild(increaseBtn);
+      newLine.appendChild(dishNumber);
+      newLine.appendChild(decreaseBtn);
+      newLine.appendChild(hr);
+      newLine.id = name;
+
+      var sideul = document.getElementById("sidebar-ul");
+      sideul.appendChild(newLine);
+
+      console.log(newLine);
+    } else {
+      var li = document.getElementById(name);
+      for (var i = 0; i < li.childNodes.length; i++) {
+          if (li.childNodes[i].className == "dish-number") {
+            var dishNum = li.childNodes[i];
+            dishNum.innerHTML = number;
+            break;
+          }
+      }
+    }
+    $("#total-price").html("Total price: " + total_price + "$");
+  }
+
+  function increase() {
+    var increBtn = this;
+    console.log(increBtn);
+    $.ajax({
+      type:"POST",
+      url:'{% url 'ajax_increase' %}',
+      data: {
+        name: $(this).val(),
+        csrfmiddlewaretoken:$('input[name=csrfmiddlewaretoken]').val()
+      },
+      success:function(data){
+        name = data['name'];
+        number = data['number'];
+        total_price = data['total_price'];
+        var parentLi = increBtn.parentNode;
+        for (var i = 0; i < parentLi.childNodes.length; i++) {
+            if (parentLi.childNodes[i].className == "dish-number") {
+              var spanNum = parentLi.childNodes[i];
+              spanNum.innerHTML = number;
+              break;
+            }
+        }
+        $("#total-price").html("Total price: " + total_price + "$");
+      }
+
+    });
+  }
+
+  function decrease() {
+    var decreBtn = this;
+    $.ajax({
+      type:"POST",
+      url:'{% url 'ajax_decrease' %}',
+      data: {
+        name: $(this).val(),
+        csrfmiddlewaretoken:$('input[name=csrfmiddlewaretoken]').val()
+      },
+      success:function(data){
+        name = data['name'];
+        number = data['number'];
+        disappear = data['disappear'];
+        total_price = data['total_price'];
+        var parentLi = decreBtn.parentNode;
+
+        if (disappear) {
+          var parentUl = parentLi.parentNode;
+          parentUl.removeChild(parentLi);
+        } else {
+          for (var i = 0; i < parentLi.childNodes.length; i++) {
+              if (parentLi.childNodes[i].className == "dish-number") {
+                var spanNum = parentLi.childNodes[i];
+                spanNum.innerHTML = number;
+                break;
+              }
+          }
+        }
+
+        $("#total-price").html("Total price: " + total_price + "$");
+      }
+
+    });
+  }
+
+
+</script>
+
 {% endblock %}

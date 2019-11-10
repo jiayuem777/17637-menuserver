@@ -11,12 +11,12 @@
   {% endif %}
 </div>
 <form action="{% url 'Management' %}" method="POST">
-{% if manager_user %}
+<!-- {% if manager_user %}
 <div class="name-enter">
   <label class="label" id="name-label">Name: </label>
-  <input type="text" class="form-control" placeholder="Name" id="name-enter" name="username" value="{{manager_user.first_name}} {{manager_user.last_name}}" readonly="readonly" required>
+  <input type="text" class="form-control" placeholder="Name" id="name-enter" name="name" value="{{manager_user.first_name}} {{manager_user.last_name}}" readonly="readonly" required>
 </div>
-{% endif %}
+{% endif %} -->
 <div class="name-enter">
   <label class="label" id="name-label">Username: </label>
   <input type="text" class="form-control" placeholder="Username" id="name-enter" name="username" {% if manager_user %}value="{{manager_user.username}}" readonly="readonly"{% endif %} required>

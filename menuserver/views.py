@@ -3,6 +3,9 @@ from django.conf import settings
 from django.core.files.storage import FileSystemStorage
 from .models import Dishes, Stores, Orders, SubmittedOrders, Roles, User
 from .forms import UserForm
+from django.http import JsonResponse
+from django.core import serializers
+from django.views.decorators.csrf import csrf_protect
 
 # Extra Imports for the Login and Logout Capabilities
 from django.contrib.auth import authenticate, login, logout
@@ -14,6 +17,8 @@ from django.contrib.auth.models import Permission, User
 from django.contrib.contenttypes.models import ContentType
 from django.shortcuts import get_object_or_404
 from django.contrib.auth.models import Group
+
+import simplejson as json
 
 # Create your views here.
 def main(request):
@@ -33,6 +38,7 @@ def menu(request):
 def menu_management(request):
     if request.method == 'GET':
         current_user = request.user
+
         if current_user.is_authenticated and current_user.roles.role == 'M':
             menu = Dishes.objects.order_by('name')
             return render(request, 'menuserver/menu_management.html', {'menu' : menu})
@@ -220,7 +226,6 @@ def store_manager_employee(request):
             if request.POST['submit'] == 'employee':
                 if 'username' in request.POST:
                     username=request.POST["username"]
-                    print(username)
                     if User.objects.filter(username=username).exists():
 
                         us = User.objects.get(username=username)
@@ -320,69 +325,15 @@ def employee(request):
 
 @login_required
 def order(request):
-
     stores = Stores.objects.order_by('store_id')
-    if request.method == 'GET':
-        if request.user.is_authenticated:
-            menu = Dishes.objects.order_by('name')
-            orders = Orders.objects.filter(username=request.user.username, is_submitted=False)
-            total_price = 0
-            for o in orders:
-                total_price += o.dish.price * o.num
-            return render(request, 'menuserver/order.html', {'menu' : menu, 'orders' : orders, 'stores' : stores, 'total_price' : total_price})
-        else:
-            return render(request, 'menuserver/error.html', {})
     if request.method == 'POST':
-        if "increase-num" in request.POST:
-            order = Orders.objects.filter(dish=Dishes.objects.get(name=request.POST["increase-num"]), username=request.user.username, is_submitted=False)
-            for o in order:
-                o.num += 1
-                o.save()
-            orders = Orders.objects.filter(username=request.user.username, is_submitted=False)
-            menu = Dishes.objects.order_by('name')
-            total_price = 0
-            for o in orders:
-                total_price += o.dish.price * o.num
-            return render(request, 'menuserver/order.html', {'menu' : menu, 'orders' : orders, 'stores' : stores, 'total_price' : total_price})
-        if "decrease-num" in request.POST:
-            order = Orders.objects.filter(dish=Dishes.objects.get(name=request.POST["decrease-num"]), username=request.user.username, is_submitted=False)
-            for o in order:
-                o.num -= 1
-                if o.num == 0:
-                    o.delete()
-                else:
-                    o.save()
-            orders = Orders.objects.filter(username=request.user.username, is_submitted=False)
-            menu = Dishes.objects.order_by('name')
-            total_price = 0
-            for o in orders:
-                total_price += o.dish.price * o.num
-            return render(request, 'menuserver/order.html', {'menu' : menu, 'orders' : orders, 'stores' : stores, 'total_price' : total_price})
-
-        if "add-dish" in request.POST and "dish-name" in request.POST:
-            order = Orders.objects.filter(dish=Dishes.objects.get(name=request.POST["dish-name"]), username=request.user.username, is_submitted=False)
-
-            if order.count() == 0:
-                dish = Dishes.objects.get(name = request.POST["dish-name"])
-                order = Orders(dish=dish, num=1, username=request.user.username, is_submitted=False)
-                order.save()
-            else:
-                for o in order:
-                    o.num += 1
-                    o.save()
-            orders = Orders.objects.filter(username=request.user.username, is_submitted=False)
-            menu = Dishes.objects.order_by('name')
-            total_price = 0
-            for o in orders:
-                total_price += o.dish.price * o.num
-            return render(request, 'menuserver/order.html', {'menu' : menu, 'orders' : orders, 'stores' : stores, 'total_price' : total_price})
-
         if "submit-button" in request.POST and "store" in request.POST:
             orders = Orders.objects.filter(username=request.user.username, is_submitted=False)
             if orders.count() > 0:
+                username = request.user.username
                 o_id = 0
                 oid_set = set()
-                all_submitted_orders = SubmittedOrders.objects.all()
+                all_submitted_orders = SubmittedOrders.objects.filter(username=username)
                 for aso in all_submitted_orders:
                     oid_set.add(int(aso.order_id))
                 while(1):
@@ -392,7 +343,6 @@ def order(request):
                         o_id += 1
 
                 store = Stores.objects.get(store_id=request.POST["store"])
-                username = request.user.username
                 submitted = SubmittedOrders(order_id=o_id, store=store, username=username)
                 submitted.save()
                 for o in orders:
@@ -414,10 +364,18 @@ def order(request):
                                                                 'processing_order': processing_order,
                                                                 'declined_order': declined_order})
 
-        stores = Stores.objects.order_by('store_id')
+    if request.user.is_authenticated:
         menu = Dishes.objects.order_by('name')
-        return render(request, 'menuserver/order.html', {'menu' : menu, 'stores' : stores})
+        orders = Orders.objects.filter(username=request.user.username, is_submitted=False)
+        total_price = 0
+        for o in orders:
+            total_price += o.dish.price * o.num
+        return render(request, 'menuserver/order.html', {'menu' : menu, 'orders' : orders, 'stores' : stores, 'total_price' : total_price})
+    else:
+        return render(request, 'menuserver/error.html', {})
 
+global s_id
+s_id = ""
 @login_required
 def submitted_order(request):
     if request.method == 'GET':
@@ -428,13 +386,15 @@ def submitted_order(request):
         else:
             return render(request, 'menuserver/error.html', {})
     if request.method == 'POST':
-        s_id = ""
         if "chosen-store" in request.POST:
+            global s_id
             s_id = request.POST["chosen-store"]
             stores = Stores.objects.order_by('store_id')
+            saved_store = Stores.objects.get(store_id=s_id)
             submitted_order = SubmittedOrders.objects.filter(store = Stores.objects.get(store_id=s_id),
                                                              is_fulfill = False, is_decline=False).order_by('order_id')
-            return render(request, 'menuserver/submitted_order.html', {'stores': stores, 'submitted_order' : submitted_order})
+            return render(request, 'menuserver/submitted_order.html',
+            {'stores': stores, 'submitted_order' : submitted_order, 'saved_store': saved_store})
         if "order-choice" in request.POST and "submitted-order-id" in request.POST:
             if SubmittedOrders.objects.filter(order_id=request.POST["submitted-order-id"]).count()== 1:
                 if request.POST["order-choice"] == "fulfill":
@@ -449,7 +409,9 @@ def submitted_order(request):
                     submitted_order = SubmittedOrders.objects.filter(store = Stores.objects.get(store_id=s_id),
                                                                      is_fulfill = False, is_decline=False).order_by('order_id')
                     stores = Stores.objects.order_by('store_id')
-                    return render(request, 'menuserver/submitted_order.html', {'stores': stores, 'submitted_order' : submitted_order})
+                    saved_store = Stores.objects.get(store_id=s_id)
+                    return render(request, 'menuserver/submitted_order.html',
+                    {'stores': stores, 'submitted_order' : submitted_order, 'saved_store': saved_store})
         stores = Stores.objects.order_by('store_id')
         return render(request, 'menuserver/submitted_order.html', {'stores': stores})
 
@@ -541,3 +503,119 @@ def user_logout(request):
 
 def error(request):
     return render(request, 'menuserver/error.html', {})
+
+def ajax_post(request):
+    if request.method == 'POST':
+
+        name = request.POST['name']
+        order = Orders.objects.filter(dish=Dishes.objects.get(name=name), username=request.user.username, is_submitted=False)
+        dish_price = 0
+        number = 0
+        exist = False
+        if order.count() == 0:
+            dish = Dishes.objects.get(name = name)
+            dish_price = dish.price
+            number = 1
+            order = Orders(dish=dish, num=number, username=request.user.username, is_submitted=False)
+            order.save()
+        else:
+            for o in order:
+                o.num += 1
+                o.save()
+                exist = True
+                number = o.num
+                dish_price = o.dish.price;
+
+        orders = Orders.objects.filter(username=request.user.username, is_submitted=False)
+        total_price = 0
+        for o in orders:
+            total_price += o.dish.price * o.num
+
+        data = {}
+        data['name'] = name
+        data['number'] = number
+        data['total_price'] = total_price
+        data['exist'] = exist
+        return JsonResponse(data)
+
+def ajax_increase(request):
+    if request.method == 'POST':
+
+        name = request.POST['name']
+        print(111)
+        print(name)
+        order = Orders.objects.filter(dish=Dishes.objects.get(name=name), username=request.user.username, is_submitted=False)
+        number = 0
+        if order.count() > 0:
+            for o in order:
+                o.num += 1
+                number = o.num
+                o.save()
+
+        orders = Orders.objects.filter(username=request.user.username, is_submitted=False)
+        total_price = 0
+        for o in orders:
+            total_price += o.dish.price * o.num
+
+        data = {}
+        data['name'] = name
+        data['number'] = number
+        data['total_price'] = total_price
+        return JsonResponse(data)
+
+def ajax_decrease(request):
+    if request.method == 'POST':
+
+        name = request.POST['name']
+        order = Orders.objects.filter(dish=Dishes.objects.get(name=name), username=request.user.username, is_submitted=False)
+        number = 0
+        disappear = False
+        if order.count() > 0:
+            for o in order:
+                o.num -= 1
+                number = o.num
+                if o.num == 0:
+                    o.delete()
+                    disappear = True
+                else:
+                    o.save()
+
+        orders = Orders.objects.filter(username=request.user.username, is_submitted=False)
+        total_price = 0
+        for o in orders:
+            total_price += o.dish.price * o.num
+
+        data = {}
+        data['name'] = name
+        data['number'] = number
+        data['total_price'] = total_price
+        data['disappear'] = disappear
+        return JsonResponse(data)
+@csrf_protect
+def ajax_reload(request):
+    if request.method == "POST":
+        s_id = request.POST['store_id']
+        saved_store = Stores.objects.get(store_id=s_id)
+        submitted_order = SubmittedOrders.objects.filter(store = Stores.objects.get(store_id=s_id),
+                                                         is_fulfill = False, is_decline=False).order_by('order_id')
+        data = serializers.serialize("json", submitted_order)
+        dataStr = json.loads(data)
+        response = {'statcode': '1', 'data': dataStr}
+        return JsonResponse(response, safe=False)
+
+def ajax_addOrder(request):
+    if request.method == "POST":
+        order_id = request.POST['order_id'];
+        username = request.POST['username'];
+        submitted_order = SubmittedOrders.objects.get(order_id = order_id, username = username)
+        orders = submitted_order.order.all()
+        dish = []
+        for o in orders:
+            dish.append(o.dish)
+
+        orders = serializers.serialize("json", orders)
+        orderStr = json.loads(orders)
+        dish = serializers.serialize("json", dish)
+        dishStr = json.loads(dish)
+        response = {'statcode': '1', 'orders': orderStr, 'dish': dishStr}
+        return JsonResponse(response, safe=False)
