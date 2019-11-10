@@ -18,7 +18,7 @@ from django.contrib.contenttypes.models import ContentType
 from django.shortcuts import get_object_or_404
 from django.contrib.auth.models import Group
 
-import simplejson as json
+import json
 
 # Create your views here.
 def main(request):
