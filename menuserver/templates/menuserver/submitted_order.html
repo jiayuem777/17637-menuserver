@@ -44,7 +44,8 @@
                 <form action="{% url 'Submitted Orders' %}" method='POST'>
                   <button class="btn btn-primary complete" type="submit" name="order-choice" value="fulfill">Fulfill</button>
                   <button class="btn btn-danger decline" type="submit" name="order-choice" value="decline">Deline</button>
-                  <input type="hidden" name='submitted-order-id' value={{s.order_id}}>
+                  <input type="hidden" name='submitted-order-id' value="{{s.order_id}}">
+                  <input type="hidden" name='submitted-order-username' value="{{s.username}}">
                 {% csrf_token %}
                 </form>
               </div>

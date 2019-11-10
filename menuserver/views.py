@@ -395,14 +395,15 @@ def submitted_order(request):
                                                              is_fulfill = False, is_decline=False).order_by('order_id')
             return render(request, 'menuserver/submitted_order.html',
             {'stores': stores, 'submitted_order' : submitted_order, 'saved_store': saved_store})
-        if "order-choice" in request.POST and "submitted-order-id" in request.POST:
-            if SubmittedOrders.objects.filter(order_id=request.POST["submitted-order-id"]).count()== 1:
+        if "order-choice" in request.POST and "submitted-order-id" in request.POST and "submitted-order-username" in request.POST :
+            if SubmittedOrders.objects.filter(order_id=request.POST["submitted-order-id"], username=request.POST["submitted-order-username"]).count()== 1:
                 if request.POST["order-choice"] == "fulfill":
-                    so = SubmittedOrders.objects.get(order_id=request.POST["submitted-order-id"])
+                    so = SubmittedOrders.objects.get(order_id=request.POST["submitted-order-id"], username=request.POST["submitted-order-username"])
+                    print(so)
                     so.is_fulfill = True
                     so.save()
                 if request.POST["order-choice"] == "decline":
-                    so = SubmittedOrders.objects.get(order_id=request.POST["submitted-order-id"])
+                    so = SubmittedOrders.objects.get(order_id=request.POST["submitted-order-id"], username=request.POST["submitted-order-username"])
                     so.is_decline = True
                     so.save()
                 if Stores.objects.filter(store_id=s_id).count() > 0: # validation
