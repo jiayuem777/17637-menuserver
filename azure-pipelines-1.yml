@@ -4,16 +4,16 @@
 # https://docs.microsoft.com/azure/devops/pipelines/languages/python
 
 trigger:
-- hw6
+- hw6_deployment
 
 pool:
   vmImage: 'ubuntu-latest'
 strategy:
   matrix:
-    Python35:
-      PYTHON_VERSION: '3.5'
-    Python36:
-      PYTHON_VERSION: '3.6'
+    # Python35:
+    #   PYTHON_VERSION: '3.5'
+    # Python36:
+    #   PYTHON_VERSION: '3.6'
     Python37:
       PYTHON_VERSION: '3.7'
   maxParallel: 3
@@ -48,6 +48,10 @@ steps:
 
 - script: |
     pushd '$(projectRoot)'
+    export DBHOST=$(DBHOST)
+    export DBUSER=$(DBUSER)
+    export DBNAME=$(DBNAME)
+    export DBPASS=$(DBPASS)
     python manage.py test --testrunner xmlrunner.extra.djangotestrunner.XMLTestRunner --no-input
   displayName: 'Run tests'
 
