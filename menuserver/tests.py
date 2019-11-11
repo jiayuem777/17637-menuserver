@@ -7,16 +7,16 @@ from .models import Dishes, Stores, Orders, SubmittedOrders, Roles
 from django.contrib.auth.models import User, Group
 import unittest
 from django.core.files.uploadedfile import SimpleUploadedFile
-import env
+
 
 # Create your tests here.
 class UserTestCase(LiveServerTestCase):
-    def setUp(self):
-        self.selenium = webdriver.Chrome()
+
     def tearDown(self):
         self.selenium.quit()
 
     def test_register(self):
+        self.selenium = webdriver.Chrome()
         selenium = self.selenium
         #Opening the link we want to test
         selenium.get('http://maojoymenuserverhw5.azurewebsites.net/register/')
