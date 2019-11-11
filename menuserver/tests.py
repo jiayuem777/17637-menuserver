@@ -8,6 +8,7 @@ from django.contrib.auth.models import User, Group
 import unittest
 from django.core.files.uploadedfile import SimpleUploadedFile
 import os
+from django.conf import settings
 
 
 
@@ -48,17 +49,17 @@ class UserTestCase(LiveServerTestCase):
 
         time.sleep(5)
 
-    def test_login(self):
-        self.driver = webdriver.Chrome()
-        self.driver.get('http://maojoymenuserverhw5.azurewebsites.net/login/')
-        login_username = self.driver.find_element_by_id('username')
-        login_password = self.driver.find_element_by_id('password')
-        login_username.send_keys('manager1')
-        login_password.send_keys('manager111')
-
-        submit = self.driver.find_element_by_name('login-submit')
-        submit.send_keys(Keys.RETURN)
-        time.sleep(5)
+    # def test_login(self):
+    #     self.driver = webdriver.Chrome()
+    #     self.driver.get('http://maojoymenuserverhw5.azurewebsites.net/login/')
+    #     login_username = self.driver.find_element_by_id('username')
+    #     login_password = self.driver.find_element_by_id('password')
+    #     login_username.send_keys('manager1')
+    #     login_password.send_keys('manager111')
+    #
+    #     submit = self.driver.find_element_by_name('login-submit')
+    #     submit.send_keys(Keys.RETURN)
+    #     time.sleep(5)
 
     def test_user_model(self):
         new_user = User.objects.create_user('new_user', 'new@user.com', 'userpassword')
