@@ -396,8 +396,8 @@ class ManagerTestCase(LiveServerTestCase):
         self.driver.get('http://maojoymenuserverhw5.azurewebsites.net/login/')
         login_username = self.driver.find_element_by_id('username')
         login_password = self.driver.find_element_by_id('password')
-        login_username.send_keys('aaa')
-        login_password.send_keys('aaapassword')
+        login_username.send_keys('manager1')
+        login_password.send_keys('manager111')
         submit = self.driver.find_element_by_name('login-submit')
         submit.send_keys(Keys.RETURN)
 
@@ -421,8 +421,8 @@ class ManagerTestCase(LiveServerTestCase):
         self.driver.get('http://maojoymenuserverhw5.azurewebsites.net/login/')
         login_username = self.driver.find_element_by_id('username')
         login_password = self.driver.find_element_by_id('password')
-        login_username.send_keys('aaa')
-        login_password.send_keys('aaapassword')
+        login_username.send_keys('manager1')
+        login_password.send_keys('manager111')
         submit = self.driver.find_element_by_name('login-submit')
         submit.send_keys(Keys.RETURN)
 
@@ -437,8 +437,8 @@ class ManagerTestCase(LiveServerTestCase):
         self.driver.get('http://maojoymenuserverhw5.azurewebsites.net/login/')
         login_username = self.driver.find_element_by_id('username')
         login_password = self.driver.find_element_by_id('password')
-        login_username.send_keys('aaa')
-        login_password.send_keys('aaapassword')
+        login_username.send_keys('manager1')
+        login_password.send_keys('manager111')
         submit = self.driver.find_element_by_name('login-submit')
         submit.send_keys(Keys.RETURN)
 
