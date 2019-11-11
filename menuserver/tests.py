@@ -9,6 +9,7 @@ import unittest
 from django.core.files.uploadedfile import SimpleUploadedFile
 
 
+
 # Create your tests here.
 class UserTestCase(LiveServerTestCase):
 
@@ -16,7 +17,7 @@ class UserTestCase(LiveServerTestCase):
     #     self.driver.quit()
 
     def test_register(self):
-        self.driver = webdriver.Chrome(executable_path='/chromedriver.exe')
+        self.driver = webdriver.Chrome(executable_path='/chromedriver')
         #Opening the link we want to test
         self.driver.get('http://maojoymenuserverhw5.azurewebsites.net/register/')
         time.sleep(2)
