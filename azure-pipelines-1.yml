@@ -45,9 +45,7 @@ steps:
     python -m pip install --upgrade pip setuptools wheel
     pip install -r requirements.txt
     pip install unittest-xml-reporting
-    wget http://chromedriver.storage.googleapis.com/2.24/chromedriver_linux64.zip
-    unzip chromedriver_linux64.zip 
-    export CHROME_BIN=chromium-browser
+    brew cask install chromedriver 
   displayName: 'Install prerequisites'
 
 - script: |
