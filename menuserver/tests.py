@@ -17,19 +17,18 @@ class UserTestCase(LiveServerTestCase):
 
     def test_register(self):
         self.driver = webdriver.Chrome()
-        selenium = self.driver
         #Opening the link we want to test
-        selenium.get('http://maojoymenuserverhw5.azurewebsites.net/register/')
+        self.driver.get('http://maojoymenuserverhw5.azurewebsites.net/register/')
         time.sleep(2)
         #find the form element
-        first_name = selenium.find_element_by_id('id_first_name')
-        last_name = selenium.find_element_by_id('id_last_name')
-        username = selenium.find_element_by_id('id_username')
-        email = selenium.find_element_by_id('id_email')
-        password1 = selenium.find_element_by_id('id_password')
-        password2 = selenium.find_element_by_id('repeat-password')
+        first_name = self.driver.find_element_by_id('id_first_name')
+        last_name = self.driver.find_element_by_id('id_last_name')
+        username = self.driver.find_element_by_id('id_username')
+        email = self.driver.find_element_by_id('id_email')
+        password1 = self.driver.find_element_by_id('id_password')
+        password2 = self.driver.find_element_by_id('repeat-password')
 
-        submit = selenium.find_element_by_name('register-submit')
+        submit = self.driver.find_element_by_name('register-submit')
 
         #Fill the form with data
         first_name.send_keys('Yusuf')
@@ -45,14 +44,14 @@ class UserTestCase(LiveServerTestCase):
         time.sleep(5)
 
     def test_login(self):
-        selenium = self.driver
-        selenium.get('http://maojoymenuserverhw5.azurewebsites.net/login/')
-        login_username = selenium.find_element_by_id('username')
-        login_password = selenium.find_element_by_id('password')
+        self.driver = webdriver.Chrome()
+        self.driver.get('http://maojoymenuserverhw5.azurewebsites.net/login/')
+        login_username = self.driver.find_element_by_id('username')
+        login_password = self.driver.find_element_by_id('password')
         login_username.send_keys('manager1')
         login_password.send_keys('manager111')
 
-        submit = selenium.find_element_by_name('login-submit')
+        submit = self.driver.find_element_by_name('login-submit')
         submit.send_keys(Keys.RETURN)
         time.sleep(5)
 
