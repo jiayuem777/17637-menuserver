@@ -13,11 +13,11 @@ from django.core.files.uploadedfile import SimpleUploadedFile
 class UserTestCase(LiveServerTestCase):
 
     def tearDown(self):
-        self.selenium.quit()
+        self.driver.quit()
 
     def test_register(self):
-        self.selenium = webdriver.Chrome()
-        selenium = self.selenium
+        self.driver = webdriver.Chrome()
+        selenium = self.driver
         #Opening the link we want to test
         selenium.get('http://maojoymenuserverhw5.azurewebsites.net/register/')
         time.sleep(2)
