@@ -9,63 +9,63 @@ import unittest
 from django.core.files.uploadedfile import SimpleUploadedFile
 
 # Create your tests here.
-# class UserTestCase(LiveServerTestCase):
-#     def setUp(self):
-#         self.selenium = webdriver.Chrome()
-#
-#     def tearDown(self):
-#         self.selenium.quit()
-#
-#     def test_register(self):
-#         selenium = self.selenium
-#         #Opening the link we want to test
-#         selenium.get('http://maojoymenuserverhw5.azurewebsites.net/register/')
-#         time.sleep(2)
-#         #find the form element
-#         first_name = selenium.find_element_by_id('id_first_name')
-#         last_name = selenium.find_element_by_id('id_last_name')
-#         username = selenium.find_element_by_id('id_username')
-#         email = selenium.find_element_by_id('id_email')
-#         password1 = selenium.find_element_by_id('id_password')
-#         password2 = selenium.find_element_by_id('repeat-password')
-#
-#         submit = selenium.find_element_by_name('register-submit')
-#
-#         #Fill the form with data
-#         first_name.send_keys('Yusuf')
-#         last_name.send_keys('Unary')
-#         username.send_keys('unaryY')
-#         email.send_keys('yusuf@qawba.com')
-#         password1.send_keys('12345678')
-#         password2.send_keys('12345678')
-#
-#         #submitting the form
-#         submit.send_keys(Keys.RETURN)
-#
-#         time.sleep(5)
-#
-#     def test_login(self):
-#         selenium = self.selenium
-#         selenium.get('http://maojoymenuserverhw5.azurewebsites.net/login/')
-#         login_username = selenium.find_element_by_id('username')
-#         login_password = selenium.find_element_by_id('password')
-#         login_username.send_keys('manager1')
-#         login_password.send_keys('manager111')
-#
-#         submit = selenium.find_element_by_name('login-submit')
-#         submit.send_keys(Keys.RETURN)
-#         time.sleep(5)
-#
-#     def test_user_model(self):
-#         new_user = User.objects.create_user('new_user', 'new@user.com', 'userpassword')
-#         new_user.first_name = 'New'
-#         new_user.last_name = 'User'
-#         new_user.save()
-#         user = User.objects.get(username='new_user')
-#         self.assertEquals('New', user.first_name)
-#         self.assertEquals('User', user.last_name)
-#         self.assertEquals('new@user.com', user.email)
-#
+class UserTestCase(LiveServerTestCase):
+    def setUp(self):
+        self.selenium = webdriver.Chrome()
+
+    def tearDown(self):
+        self.selenium.quit()
+
+    def test_register(self):
+        selenium = self.selenium
+        #Opening the link we want to test
+        selenium.get('http://maojoymenuserverhw5.azurewebsites.net/register/')
+        time.sleep(2)
+        #find the form element
+        first_name = selenium.find_element_by_id('id_first_name')
+        last_name = selenium.find_element_by_id('id_last_name')
+        username = selenium.find_element_by_id('id_username')
+        email = selenium.find_element_by_id('id_email')
+        password1 = selenium.find_element_by_id('id_password')
+        password2 = selenium.find_element_by_id('repeat-password')
+
+        submit = selenium.find_element_by_name('register-submit')
+
+        #Fill the form with data
+        first_name.send_keys('Yusuf')
+        last_name.send_keys('Unary')
+        username.send_keys('unaryY')
+        email.send_keys('yusuf@qawba.com')
+        password1.send_keys('12345678')
+        password2.send_keys('12345678')
+
+        #submitting the form
+        submit.send_keys(Keys.RETURN)
+
+        time.sleep(5)
+
+    def test_login(self):
+        selenium = self.selenium
+        selenium.get('http://maojoymenuserverhw5.azurewebsites.net/login/')
+        login_username = selenium.find_element_by_id('username')
+        login_password = selenium.find_element_by_id('password')
+        login_username.send_keys('manager1')
+        login_password.send_keys('manager111')
+
+        submit = selenium.find_element_by_name('login-submit')
+        submit.send_keys(Keys.RETURN)
+        time.sleep(5)
+
+    def test_user_model(self):
+        new_user = User.objects.create_user('new_user', 'new@user.com', 'userpassword')
+        new_user.first_name = 'New'
+        new_user.last_name = 'User'
+        new_user.save()
+        user = User.objects.get(username='new_user')
+        self.assertEquals('New', user.first_name)
+        self.assertEquals('User', user.last_name)
+        self.assertEquals('new@user.com', user.email)
+
 #
 # class MenuManagementTestCase(LiveServerTestCase):
 #
