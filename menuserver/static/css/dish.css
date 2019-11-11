@@ -47,3 +47,8 @@ h1 {
   color: white;
   margin-left:300px;
 }
+
+#error-massage {
+  color: white;
+  font-size: 16px;
+}

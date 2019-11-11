@@ -4,6 +4,11 @@
   <link rel="stylesheet" type="text/css" href="{% static 'css/dish.css' %}">{% endblock %}
 {% block title %}Dish{% endblock %}
 {% block form_content %}
+{% if error %}
+<div>
+  <p id="error-massage">{{error}}</p>
+</div>
+{% endif %}
 <form action="{% url 'Menu Management' %}" method="POST" enctype="multipart/form-data">
 <div>
 <label class="label" id="category">Category: </label>

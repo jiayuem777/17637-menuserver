@@ -6,6 +6,7 @@ from .forms import UserForm
 from django.http import JsonResponse
 from django.core import serializers
 from django.views.decorators.csrf import csrf_protect
+from django.core.exceptions import ValidationError
 
 # Extra Imports for the Login and Logout Capabilities
 from django.contrib.auth import authenticate, login, logout
@@ -65,6 +66,12 @@ def menu_management(request):
                         dish = Dishes.objects.get(id=request.POST['dish-id'])
                         dish.categary = request.POST["category"]
                         dish.name = request.POST["dish-name"]
+                        price = request.POST["dish-price"]
+                        # validation price
+                        for char in price:
+                            if not (char.isdigit() or char=='.'):
+                                error = "Price must be number"
+                                return render(request, 'menuserver/dish.html', {'error': error})
                         dish.price = request.POST["dish-price"]
                         photo = request.FILES['photo-file']
                         fs = FileSystemStorage()
@@ -74,6 +81,12 @@ def menu_management(request):
                         dish.save()
             if request.POST["submit-dish"] == "new-dish":
                 if "category" in request.POST and "dish-name" in request.POST and "dish-price" in request.POST and 'photo-file' in request.FILES:
+                    price = request.POST["dish-price"]
+                    # validation price
+                    for char in price:
+                        if not (char.isdigit() or char=='.'):
+                            error = "Price must be number"
+                            return render(request, 'menuserver/dish.html', {'error': error})
                     new_dish = Dishes(categary=request.POST["category"], name=request.POST["dish-name"], price=request.POST["dish-price"])
                     photo = request.FILES['photo-file']
                     fs = FileSystemStorage()
@@ -94,6 +107,13 @@ def dish(request):
                     dish = Dishes.objects.get(id=request.POST['dish-id'])
                     dish.categary = request.POST["category"]
                     dish.name = request.POST["dish-name"]
+                    price = request.POST["dish-price"]
+                    # validation price
+                    for char in price:
+                        if not (char.isdigit() or char=='.'):
+                            error = "Price must be number"
+                            return render(request, 'menuserver/dish.html', {'error': error})
+                    
                     dish.price = request.POST["dish-price"]
                     photo = request.FILES['photo-file']
                     fs = FileSystemStorage()
@@ -103,6 +123,13 @@ def dish(request):
                     dish.save()
         if request.POST["submit-dish"] == "new-dish":
             if "category" in request.POST and "dish-name" in request.POST and "dish-price" in request.POST and 'photo-file' in request.FILES:
+                price = request.POST["dish-price"]
+                # validation price
+                for char in price:
+                    if not (char.isdigit() or char=='.'):
+                        error = "Price must be number"
+                        return render(request, 'menuserver/dish.html', {'error': error})
+
                 new_dish = Dishes(categary=request.POST["category"], name=request.POST["dish-name"], price=request.POST["dish-price"])
                 photo = request.FILES['photo-file']
                 fs = FileSystemStorage()

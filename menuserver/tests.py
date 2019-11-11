@@ -19,7 +19,7 @@ from django.core.files.uploadedfile import SimpleUploadedFile
 #     def test_register(self):
 #         selenium = self.selenium
 #         #Opening the link we want to test
-#         selenium.get('http://127.0.0.1:8000/register/')
+#         selenium.get('http://maojoymenuserverhw5.azurewebsites.net/register/')
 #         time.sleep(2)
 #         #find the form element
 #         first_name = selenium.find_element_by_id('id_first_name')
@@ -46,7 +46,7 @@ from django.core.files.uploadedfile import SimpleUploadedFile
 #
 #     def test_login(self):
 #         selenium = self.selenium
-#         selenium.get('http://127.0.0.1:8000/login/')
+#         selenium.get('http://maojoymenuserverhw5.azurewebsites.net/login/')
 #         login_username = selenium.find_element_by_id('username')
 #         login_password = selenium.find_element_by_id('password')
 #         login_username.send_keys('manager1')
@@ -77,7 +77,7 @@ from django.core.files.uploadedfile import SimpleUploadedFile
 #
 #     def test_add(self):
 #         selenium = self.selenium
-#         selenium.get('http://127.0.0.1:8000/login/')
+#         selenium.get('http://maojoymenuserverhw5.azurewebsites.net/login/')
 #         login_username = selenium.find_element_by_id('username')
 #         login_password = selenium.find_element_by_id('password')
 #         login_username.send_keys('manager1')
@@ -86,7 +86,7 @@ from django.core.files.uploadedfile import SimpleUploadedFile
 #         submit = selenium.find_element_by_name('login-submit')
 #         submit.send_keys(Keys.RETURN)
 #         #Opening the link we want to test
-#         selenium.get('http://127.0.0.1:8000/menu_management/')
+#         selenium.get('http://maojoymenuserverhw5.azurewebsites.net/menu_management/')
 #
 #         add_dish = selenium.find_element_by_xpath("//button[@id='add-dish']").click()
 #         time.sleep(3)
@@ -102,7 +102,7 @@ from django.core.files.uploadedfile import SimpleUploadedFile
 #
 #     def test_delete(self):
 #         selenium = self.selenium
-#         selenium.get('http://127.0.0.1:8000/login/')
+#         selenium.get('http://maojoymenuserverhw5.azurewebsites.net/login/')
 #         login_username = selenium.find_element_by_id('username')
 #         login_password = selenium.find_element_by_id('password')
 #         login_username.send_keys('manager1')
@@ -110,14 +110,14 @@ from django.core.files.uploadedfile import SimpleUploadedFile
 #         submit = selenium.find_element_by_name('login-submit')
 #         submit.send_keys(Keys.RETURN)
 #
-#         selenium.get('http://127.0.0.1:8000/menu_management/')
+#         selenium.get('http://maojoymenuserverhw5.azurewebsites.net/menu_management/')
 #         time.sleep(2)
 #         submit = selenium.find_element_by_xpath("//button[@value='delete']").click()
 #         time.sleep(5)
 #
 #     def test_edit(self):
 #         selenium = self.selenium
-#         selenium.get('http://127.0.0.1:8000/login/')
+#         selenium.get('http://maojoymenuserverhw5.azurewebsites.net/login/')
 #         login_username = selenium.find_element_by_id('username')
 #         login_password = selenium.find_element_by_id('password')
 #         login_username.send_keys('manager1')
@@ -125,7 +125,7 @@ from django.core.files.uploadedfile import SimpleUploadedFile
 #         submit = selenium.find_element_by_name('login-submit')
 #         submit.send_keys(Keys.RETURN)
 #
-#         selenium.get('http://127.0.0.1:8000/menu_management/')
+#         selenium.get('http://maojoymenuserverhw5.azurewebsites.net/menu_management/')
 #         time.sleep(2)
 #         submit = selenium.find_element_by_xpath("//button[@value='edit']").click()
 #         time.sleep(3)
@@ -158,7 +158,7 @@ class DishTestCase(LiveServerTestCase):
 #
 #     def test_add_order(self):
 #         selenium = self.selenium
-#         selenium.get('http://127.0.0.1:8000/login/')
+#         selenium.get('http://maojoymenuserverhw5.azurewebsites.net/login/')
 #         login_username = selenium.find_element_by_id('username')
 #         login_password = selenium.find_element_by_id('password')
 #         login_username.send_keys('manager1')
@@ -166,7 +166,7 @@ class DishTestCase(LiveServerTestCase):
 #         submit = selenium.find_element_by_name('login-submit')
 #         submit.send_keys(Keys.RETURN)
 #
-#         selenium.get('http://127.0.0.1:8000/order/')
+#         selenium.get('http://maojoymenuserverhw5.azurewebsites.net/order/')
 #         time.sleep(2)
 #
 #         addBtn = selenium.find_element_by_xpath("//button[@name='add-dish']")
@@ -204,7 +204,7 @@ class OrderModelTestCase(LiveServerTestCase):
 #
 #     def test_fulfill(self):
 #         selenium = self.selenium
-#         selenium.get('http://127.0.0.1:8000/login/')
+#         selenium.get('http://maojoymenuserverhw5.azurewebsites.net/login/')
 #         login_username = selenium.find_element_by_id('username')
 #         login_password = selenium.find_element_by_id('password')
 #         login_username.send_keys('manager1')
@@ -212,7 +212,7 @@ class OrderModelTestCase(LiveServerTestCase):
 #         submit = selenium.find_element_by_name('login-submit')
 #         submit.send_keys(Keys.RETURN)
 #
-#         selenium.get('http://127.0.0.1:8000/submitted_order/')
+#         selenium.get('http://maojoymenuserverhw5.azurewebsites.net/submitted_order/')
 #         time.sleep(2)
 #         storeBtn = selenium.find_element_by_xpath("//button[@name='chosen-store']")
 #         storeBtn.click()
@@ -225,7 +225,7 @@ class OrderModelTestCase(LiveServerTestCase):
 #
 #     def test_decline(self):
 #         selenium = self.selenium
-#         selenium.get('http://127.0.0.1:8000/login/')
+#         selenium.get('http://maojoymenuserverhw5.azurewebsites.net/login/')
 #         login_username = selenium.find_element_by_id('username')
 #         login_password = selenium.find_element_by_id('password')
 #         login_username.send_keys('manager1')
@@ -233,7 +233,7 @@ class OrderModelTestCase(LiveServerTestCase):
 #         submit = selenium.find_element_by_name('login-submit')
 #         submit.send_keys(Keys.RETURN)
 #
-#         selenium.get('http://127.0.0.1:8000/submitted_order/')
+#         selenium.get('http://maojoymenuserverhw5.azurewebsites.net/submitted_order/')
 #         time.sleep(2)
 #         storeBtn = selenium.find_element_by_xpath("//button[@name='chosen-store']")
 #         storeBtn.click()
@@ -294,7 +294,7 @@ class SubmittedOrderModelTestCase(LiveServerTestCase):
 #
 #     def test_add_store(self):
 #         selenium = self.selenium
-#         selenium.get('http://127.0.0.1:8000/login/')
+#         selenium.get('http://maojoymenuserverhw5.azurewebsites.net/login/')
 #         login_username = selenium.find_element_by_id('username')
 #         login_password = selenium.find_element_by_id('password')
 #         login_username.send_keys('manager1')
@@ -302,7 +302,7 @@ class SubmittedOrderModelTestCase(LiveServerTestCase):
 #         submit = selenium.find_element_by_name('login-submit')
 #         submit.send_keys(Keys.RETURN)
 #
-#         selenium.get('http://127.0.0.1:8000/store_manager_employee/')
+#         selenium.get('http://maojoymenuserverhw5.azurewebsites.net/store_manager_employee/')
 #         time.sleep(2)
 #         addBtn = selenium.find_element_by_xpath("//button[@name='add-store']")
 #         addBtn.click()
@@ -320,7 +320,7 @@ class SubmittedOrderModelTestCase(LiveServerTestCase):
 #
 #     def test_delete_store(self):
 #         selenium = self.selenium
-#         selenium.get('http://127.0.0.1:8000/login/')
+#         selenium.get('http://maojoymenuserverhw5.azurewebsites.net/login/')
 #         login_username = selenium.find_element_by_id('username')
 #         login_password = selenium.find_element_by_id('password')
 #         login_username.send_keys('manager1')
@@ -328,7 +328,7 @@ class SubmittedOrderModelTestCase(LiveServerTestCase):
 #         submit = selenium.find_element_by_name('login-submit')
 #         submit.send_keys(Keys.RETURN)
 #
-#         selenium.get('http://127.0.0.1:8000/store_manager_employee/')
+#         selenium.get('http://maojoymenuserverhw5.azurewebsites.net/store_manager_employee/')
 #         time.sleep(2)
 #
 #         deleteBtn = selenium.find_element_by_xpath("//button[@value='delete']")
@@ -337,7 +337,7 @@ class SubmittedOrderModelTestCase(LiveServerTestCase):
 #
 #     def test_edit_store(self):
 #         selenium = self.selenium
-#         selenium.get('http://127.0.0.1:8000/login/')
+#         selenium.get('http://maojoymenuserverhw5.azurewebsites.net/login/')
 #         login_username = selenium.find_element_by_id('username')
 #         login_password = selenium.find_element_by_id('password')
 #         login_username.send_keys('manager1')
@@ -345,7 +345,7 @@ class SubmittedOrderModelTestCase(LiveServerTestCase):
 #         submit = selenium.find_element_by_name('login-submit')
 #         submit.send_keys(Keys.RETURN)
 #
-#         selenium.get('http://127.0.0.1:8000/store_manager_employee/')
+#         selenium.get('http://maojoymenuserverhw5.azurewebsites.net/store_manager_employee/')
 #         time.sleep(2)
 #
 #         editBtn = selenium.find_element_by_xpath("//button[@value='edit']")
@@ -384,7 +384,7 @@ class RoleTestCase(LiveServerTestCase):
 #
 #     def test_add_manager(self):
 #         selenium = self.selenium
-#         selenium.get('http://127.0.0.1:8000/login/')
+#         selenium.get('http://maojoymenuserverhw5.azurewebsites.net/login/')
 #         login_username = selenium.find_element_by_id('username')
 #         login_password = selenium.find_element_by_id('password')
 #         login_username.send_keys('aaa')
@@ -392,7 +392,7 @@ class RoleTestCase(LiveServerTestCase):
 #         submit = selenium.find_element_by_name('login-submit')
 #         submit.send_keys(Keys.RETURN)
 #
-#         selenium.get('http://127.0.0.1:8000/store_manager_employee/')
+#         selenium.get('http://maojoymenuserverhw5.azurewebsites.net/store_manager_employee/')
 #         time.sleep(2)
 #         addBtn = selenium.find_element_by_xpath("//button[@id='add-manager']")
 #         addBtn.click()
@@ -410,7 +410,7 @@ class RoleTestCase(LiveServerTestCase):
 #
 #     def test_delete_manager(self):
 #         selenium = self.selenium
-#         selenium.get('http://127.0.0.1:8000/login/')
+#         selenium.get('http://maojoymenuserverhw5.azurewebsites.net/login/')
 #         login_username = selenium.find_element_by_id('username')
 #         login_password = selenium.find_element_by_id('password')
 #         login_username.send_keys('aaa')
@@ -418,7 +418,7 @@ class RoleTestCase(LiveServerTestCase):
 #         submit = selenium.find_element_by_name('login-submit')
 #         submit.send_keys(Keys.RETURN)
 #
-#         selenium.get('http://127.0.0.1:8000/store_manager_employee/')
+#         selenium.get('http://maojoymenuserverhw5.azurewebsites.net/store_manager_employee/')
 #         time.sleep(2)
 #
 #         deleteBtn = selenium.find_element_by_xpath("//button[@id='delete-manager']")
@@ -427,7 +427,7 @@ class RoleTestCase(LiveServerTestCase):
 #
 #     def test_edit_manager(self):
 #         selenium = self.selenium
-#         selenium.get('http://127.0.0.1:8000/login/')
+#         selenium.get('http://maojoymenuserverhw5.azurewebsites.net/login/')
 #         login_username = selenium.find_element_by_id('username')
 #         login_password = selenium.find_element_by_id('password')
 #         login_username.send_keys('aaa')
@@ -435,7 +435,7 @@ class RoleTestCase(LiveServerTestCase):
 #         submit = selenium.find_element_by_name('login-submit')
 #         submit.send_keys(Keys.RETURN)
 #
-#         selenium.get('http://127.0.0.1:8000/store_manager_employee/')
+#         selenium.get('http://maojoymenuserverhw5.azurewebsites.net/store_manager_employee/')
 #         time.sleep(2)
 #
 #         editBtn = selenium.find_element_by_xpath("//button[@id='edit-manager']").click()
