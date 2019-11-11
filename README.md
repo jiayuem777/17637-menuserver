@@ -1,10 +1,6 @@
 
 
-
-**********Use three-day grace day**********
-
-
-Homework 5
+Homework 6
 
 http://maojoymenuserverhw5.azurewebsites.net
 
@@ -19,6 +15,8 @@ Submitted order page: http://maojoymenuserverhw5.azurewebsites.net/submitted_ord
 Management page: http://maojoymenuserverhw5.azurewebsites.net/store_manager_employee/
 
 To jump to other page, you can click the anchor "Mao's rastaurant" on the left top of navbar and back to the main page. Then there are buttons which can direct you to other pages.
+
+********Attn: when entering submitted order page, there are several buttons above indication all the stores. ONLY if you click on one of the buttons, the reloading every 5 seconds of submitted orders will work for that particular store!!! ***********
 
 The manager can change user's role in the Management page, where he can add a new manager/employee (which means make a customer to be a manager or employee) or delete a manager/employee (which means make users with role of manager/employee to be a customer)
 
