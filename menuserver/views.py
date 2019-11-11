@@ -113,7 +113,7 @@ def dish(request):
                         if not (char.isdigit() or char=='.'):
                             error = "Price must be number"
                             return render(request, 'menuserver/dish.html', {'error': error})
-                    
+
                     dish.price = request.POST["dish-price"]
                     photo = request.FILES['photo-file']
                     fs = FileSystemStorage()
@@ -621,7 +621,7 @@ def ajax_decrease(request):
         return JsonResponse(data)
 @csrf_protect
 def ajax_reload(request):
-    if request.method == "POST":
+    if request.method == "POST" and 'store_id' in request.POST:
         s_id = request.POST['store_id']
         saved_store = Stores.objects.get(store_id=s_id)
         submitted_order = SubmittedOrders.objects.filter(store = Stores.objects.get(store_id=s_id),
