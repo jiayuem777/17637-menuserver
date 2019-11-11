@@ -8,7 +8,7 @@ from django.contrib.auth.models import User, Group
 import unittest
 from django.core.files.uploadedfile import SimpleUploadedFile
 import env
-from env.bin import chromedriver
+# from env.bin import chromedriver
 
 # Create your tests here.
 class UserTestCase(LiveServerTestCase):
