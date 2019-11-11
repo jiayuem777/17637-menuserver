@@ -45,7 +45,6 @@ steps:
     python -m pip install --upgrade pip setuptools wheel
     pip install -r requirements.txt
     pip install unittest-xml-reporting
-    brew cask install chromedriver 
   displayName: 'Install prerequisites'
 
 - script: |
