@@ -7,6 +7,7 @@ from .models import Dishes, Stores, Orders, SubmittedOrders, Roles
 from django.contrib.auth.models import User, Group
 import unittest
 from django.core.files.uploadedfile import SimpleUploadedFile
+import os
 
 
 
@@ -17,7 +18,10 @@ class UserTestCase(LiveServerTestCase):
     #     self.driver.quit()
 
     def test_register(self):
-        self.driver = webdriver.Firefox()
+        options = webdriver.ChromeOptions()
+        options.add_argument('headless')
+
+        self.driver = webdriver.Chrome(excutable_path=os.path.join(settings.BASE_DIR, 'chromedriver'), chrome_options=options)
         #Opening the link we want to test
         self.driver.get('http://maojoymenuserverhw5.azurewebsites.net/register/')
         time.sleep(2)
@@ -45,7 +49,7 @@ class UserTestCase(LiveServerTestCase):
         time.sleep(5)
 
     def test_login(self):
-        self.driver = webdriver.Firefox()
+        self.driver = webdriver.Chrome()
         self.driver.get('http://maojoymenuserverhw5.azurewebsites.net/login/')
         login_username = self.driver.find_element_by_id('username')
         login_password = self.driver.find_element_by_id('password')
