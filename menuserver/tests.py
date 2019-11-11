@@ -12,8 +12,8 @@ from django.core.files.uploadedfile import SimpleUploadedFile
 # Create your tests here.
 class UserTestCase(LiveServerTestCase):
 
-    def tearDown(self):
-        self.driver.quit()
+    # def tearDown(self):
+    #     self.driver.quit()
 
     def test_register(self):
         self.driver = webdriver.Chrome()
