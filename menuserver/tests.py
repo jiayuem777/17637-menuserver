@@ -44,7 +44,7 @@ class UserTestCase(LiveServerTestCase):
         time.sleep(5)
 
     def test_login(self):
-        self.driver = webdriver.Chrome(executable_path='/chromedriver.exe')
+        self.driver = webdriver.Chrome(executable_path='/chromedriver')
         self.driver.get('http://maojoymenuserverhw5.azurewebsites.net/login/')
         login_username = self.driver.find_element_by_id('username')
         login_password = self.driver.find_element_by_id('password')
