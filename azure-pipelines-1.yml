@@ -23,14 +23,12 @@ steps:
   inputs:
     versionSpec: '$(PYTHON_VERSION)'
     architecture: 'x64'
-
-steps:
-  - bash: echo This is a script that could use $SYSTEM_ACCESSTOKEN
-    env:
-      SYSTEM_ACCESSTOKEN: $(System.AccessToken)
-  - powershell: Write-Host "This is a script that could use $env:SYSTEM_ACCESSTOKEN"
-    env:
-      SYSTEM_ACCESSTOKEN: $(System.AccessToken)
+- bash: echo This is a script that could use $SYSTEM_ACCESSTOKEN
+  env:
+    SYSTEM_ACCESSTOKEN: $(System.AccessToken)
+- powershell: Write-Host "This is a script that could use $env:SYSTEM_ACCESSTOKEN"
+  env:
+    SYSTEM_ACCESSTOKEN: $(System.AccessToken)
 
 - task: PythonScript@0
   displayName: 'Export project path'
