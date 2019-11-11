@@ -7,13 +7,14 @@ from .models import Dishes, Stores, Orders, SubmittedOrders, Roles
 from django.contrib.auth.models import User, Group
 import unittest
 from django.core.files.uploadedfile import SimpleUploadedFile
-import env
+# import env
 # from env.bin import chromedriver
 
 # Create your tests here.
 class UserTestCase(LiveServerTestCase):
     def setUp(self):
-        self.selenium = webdriver.Chrome()
+        driverLocation = 'chromedriver.exe'
+        self.selenium = webdriver.Chrome(driverLocation)
 
     def tearDown(self):
         self.selenium.quit()
