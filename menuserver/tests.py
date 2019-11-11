@@ -12,8 +12,7 @@ import env
 # Create your tests here.
 class UserTestCase(LiveServerTestCase):
     def setUp(self):
-        driverLocation = '/env/bin/chromedriver'
-        self.selenium = webdriver.Chrome(executable_path='/Users/jiayuemao/Desktop/17637/homework/chromedriver')
+        self.selenium = webdriver.Chrome()
     def tearDown(self):
         self.selenium.quit()
 
