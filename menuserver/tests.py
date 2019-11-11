@@ -45,7 +45,7 @@ class UserTestCase(LiveServerTestCase):
         time.sleep(5)
 
     def test_login(self):
-        selenium = self.selenium
+        selenium = self.driver
         selenium.get('http://maojoymenuserverhw5.azurewebsites.net/login/')
         login_username = selenium.find_element_by_id('username')
         login_password = selenium.find_element_by_id('password')
