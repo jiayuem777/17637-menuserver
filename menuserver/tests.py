@@ -22,7 +22,7 @@ class UserTestCase(LiveServerTestCase):
         options = webdriver.ChromeOptions()
         options.add_argument('headless')
 
-        self.driver = webdriver.Chrome(excutable_path=os.path.join(settings.BASE_DIR, 'chromedriver'), chrome_options=options)
+        self.driver = webdriver.Chrome(executable_path=os.path.join(settings.BASE_DIR, 'chromedriver'), chrome_options=options)
         #Opening the link we want to test
         self.driver.get('http://maojoymenuserverhw5.azurewebsites.net/register/')
         time.sleep(2)
