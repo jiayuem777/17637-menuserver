@@ -452,15 +452,3 @@ class ManagerTestCase(LiveServerTestCase):
         submit = self.driver.find_element_by_xpath("//button[@name='submit']")
         submit.click()
         time.sleep(3)
-
-
-
-
-
-
-
-# class StoreTestCase(LiveServerTestCase):
-#
-# class OrderTestCase(LiveServerTestCase):
-# js image ajax-csrf
-# class RoleTestCase(LiveServerTestCase):
