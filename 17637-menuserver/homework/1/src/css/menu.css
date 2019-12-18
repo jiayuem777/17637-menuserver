@@ -1,0 +1,42 @@
+body {
+      padding-top: 70px;
+      background: url(https://img1.cookinglight.timeinc.net/sites/default/files/styles/4_3_horizontal_-_1200x900/public/1526933142/warm-pasta-salad-with-tomatoes-and-eggplant-1807-cover_1.jpg?itok=Rq_wbF2e);
+      background-size: 100%;
+      background-attachment: fixed;
+      background-repeat： no-repeat;
+}
+
+.container {
+	background-color: rgba(0, 0, 0, 0.3); 
+}
+
+h1 {
+	font-family: chalkduster;
+	font-size: 70px;
+	font-weight: 500;
+	color: white;
+	padding-top: 10px;
+	text-align: center;
+	padding-bottom: 30px;
+}
+
+.type {
+	font-size: 25px;
+	font-family: Bradley hand;
+	padding-left: 20px;
+	color: black;
+}
+
+.name {
+	font-family: Avenir Next;
+	font-size: 20px;
+	color: Black ;
+}
+
+.price {
+	font-family: Bradley hand;
+	font-size: 20px;
+	text-align: right;
+	padding-right: 30px;
+}
+
